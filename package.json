@@ -1,0 +1,7 @@
+{
+  "name": "mae-fueang-leave-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ระบบการลาและสอนแทน โรงเรียนบ้านแม่เฟือง",
+  "dependencies": { "@netlify/blobs": "^8.1.0" }
+}
