@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="th" data-theme="auto"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ระบบการลาและสอนแทน โรงเรียนบ้านแม่เฟือง · สพป.ลำปาง เขต 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@500;600&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#fff8ef;--surface:#fffdfa;--surface-2:#fdf1e3;--ink:#3b2b1e;--muted:#85705c;--line:#f0dfcb;--line-strong:#e2c9ab;--btn:#e8702a;--btn-ink:#fff;--link:#c25a16;--soft:#fde8d3;--soft-ink:#a0470f;--ok-bg:#e3f2de;--ok-ink:#2f6a2b;--warn-bg:#fde3d6;--warn-ink:#9a3b0b;--pend-bg:#fff0c2;--pend-ink:#7a5600;--danger:#b3362e;--focus:#c25a16;
+--display:"Prompt","Sarabun","Noto Sans Thai",system-ui,sans-serif;--body:"Sarabun","Noto Sans Thai",system-ui,sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a1410;--surface:#241c16;--surface-2:#2c231b;--ink:#f4e9dc;--muted:#b9a48f;--line:#3a2e24;--line-strong:#52412f;--btn:#ee7f3a;--btn-ink:#1a1008;--link:#f3a26b;--soft:#3b2b1d;--soft-ink:#f6c8a0;--ok-bg:#1f3622;--ok-ink:#9fd69a;--warn-bg:#40251a;--warn-ink:#f6b89a;--pend-bg:#3b3110;--pend-ink:#f3d675;--danger:#ff9d94;--focus:#f3a26b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1a1410;--surface:#241c16;--surface-2:#2c231b;--ink:#f4e9dc;--muted:#b9a48f;--line:#3a2e24;--line-strong:#52412f;--btn:#ee7f3a;--btn-ink:#1a1008;--link:#f3a26b;--soft:#3b2b1d;--soft-ink:#f6c8a0;--ok-bg:#1f3622;--ok-ink:#9fd69a;--warn-bg:#40251a;--warn-ink:#f6b89a;--pend-bg:#3b3110;--pend-ink:#f3d675;--danger:#ff9d94;--focus:#f3a26b;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--body);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+button{font:inherit;cursor:pointer}
+[hidden]{display:none!important}
+.band{border-bottom:1px solid var(--line);background:var(--surface)}
+.band-in{max-width:880px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 16px}
+.seal{width:48px;height:48px;border-radius:50%;flex:none}
+.band-txt{flex:1 1 200px;min-width:0}
+.kicker{margin:0;font-size:13px;color:var(--muted);line-height:1.3}
+.band h1{margin:0;font:600 21px/1.3 var(--display)}
+.tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.theme{display:inline-flex;border:1px solid var(--line-strong);border-radius:999px;overflow:hidden}
+.theme button{border:0;background:transparent;color:var(--muted);padding:4px 11px;min-height:34px;font-size:14px}
+.theme button[aria-pressed="true"]{background:var(--btn);color:var(--btn-ink)}
+.status{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
+.status i{width:9px;height:9px;border-radius:50%;background:#bbb}
+.status[data-m="shared"] i{background:#4caf6d}.status[data-m="local"] i{background:#e8a32a}.status[data-m="offline"] i{background:#d9534f}
+.me{display:flex;align-items:center;gap:8px;font-size:14px}
+.wrap{max-width:880px;margin:0 auto;padding:18px 16px 56px}
+.tabs{display:flex;gap:6px;background:var(--soft);padding:5px;border-radius:12px;margin-bottom:18px}
+.tabs a{flex:1;text-align:center;text-decoration:none;color:var(--soft-ink);font-weight:600;padding:9px 6px;border-radius:9px;font-size:15px}
+.tabs a[aria-current="page"]{background:var(--surface);box-shadow:0 1px 2px rgba(0,0,0,.12);color:var(--link)}
+.cnt{display:inline-block;min-width:20px;padding:0 6px;border-radius:999px;background:var(--btn);color:var(--btn-ink);font-size:12px;margin-left:4px}
+h2{font:600 18px/1.4 var(--display);margin:0 0 12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}
+.hint{color:var(--muted);font-size:14px;margin:0 0 12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fld{display:flex;flex-direction:column;gap:6px;min-width:0}
+label.l{font-weight:600;font-size:15px}
+.req{color:var(--danger)}
+select,input[type=text],input[type=date],input[type=time],input[type=password],input[type=number],textarea{width:100%;min-height:46px;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;padding:8px 12px}
+textarea{min-height:76px;resize:vertical}
+select:hover,input:hover,textarea:hover{border-color:var(--btn)}
+.datehint{margin:0;font-size:14px;color:var(--muted)}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.seg.r3{grid-template-columns:repeat(3,1fr)}
+.seg label{position:relative;display:block}
+.seg input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.seg span{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:56px;padding:6px;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface-2);font-weight:600;line-height:1.35}
+.seg small{font-weight:400;font-size:13px;color:var(--muted)}
+.seg input:checked+span{background:var(--btn);border-color:var(--btn);color:var(--btn-ink)}
+.seg input:checked+span small{color:var(--btn-ink);opacity:.85}
+.seg input:focus-visible+span{outline:3px solid var(--focus);outline-offset:2px}
+.custom{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:end;margin-top:12px}
+.quick{display:flex;flex-direction:column;gap:6px;background:var(--soft);border-radius:10px;padding:12px;margin-bottom:12px}
+.quick label{font-weight:600;font-size:14px;color:var(--soft-ink)}
+.prow{display:grid;grid-template-columns:116px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--line)}
+.prow:first-of-type{border-top:0;padding-top:4px}
+.plab{display:flex;flex-direction:column;line-height:1.35}
+.plab b{font:600 17px var(--display);color:var(--link)}
+.plab span{font-size:14px;color:var(--muted)}
+.pctl{gap:8px}
+.lunch{margin:2px 0;padding:6px 12px;border-radius:8px;background:var(--pend-bg);color:var(--pend-ink);font-size:14px;text-align:center}
+.warn{margin:0;font-size:14px;color:var(--warn-ink);background:var(--warn-bg);border-radius:8px;padding:6px 10px}
+.empty,.progress{margin:6px 0 0;color:var(--muted);font-size:14px}
+.addrow{display:flex;gap:8px;flex-wrap:wrap}.addrow input{flex:1 1 200px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 18px;border-radius:10px;border:1px solid var(--btn);background:var(--btn);color:var(--btn-ink);font-weight:600}
+.btn.small{min-height:38px;padding:5px 14px;font-size:15px}
+.btn.ghost{background:transparent;color:var(--link);border-color:var(--line-strong)}
+.btn.ok{background:var(--ok-ink);border-color:var(--ok-ink);color:var(--surface)}
+.btn.no{background:transparent;color:var(--danger);border-color:var(--danger)}
+.btn.cta{min-height:50px;font-size:17px;width:100%}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.formerr{margin:0 0 12px;padding:10px 12px;border-radius:10px;background:var(--warn-bg);color:var(--warn-ink);font-weight:500}
+.notice{margin:0 0 16px;padding:10px 14px;border-radius:10px;background:var(--pend-bg);color:var(--pend-ink);font-size:14px}
+.login{max-width:440px;margin:24px auto}
+.login .seg{margin-bottom:14px}
+.today{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin:0 0 14px;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--btn);border-radius:12px}
+.pill{display:inline-block;border-radius:999px;padding:1px 10px;font-size:14px;font-weight:600}
+.pill.warn{background:var(--warn-bg);color:var(--warn-ink)}.pill.ok{background:var(--ok-bg);color:var(--ok-ink)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;align-items:center}
+.chip{min-height:38px;padding:3px 14px;border-radius:999px;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);font-weight:500}
+.chip[aria-pressed="true"]{background:var(--btn);border-color:var(--btn);color:var(--btn-ink)}
+.filters select{width:auto;min-height:38px;flex:1 1 150px;max-width:260px}
+.day{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:22px 0 10px;font:600 16px var(--display);color:var(--soft-ink)}
+.day .tag{background:var(--btn);color:var(--btn-ink);border-radius:999px;padding:0 10px;font:700 13px var(--body)}
+.reqc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px}
+.who{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;min-width:0}
+.who strong{font-size:17px;overflow-wrap:anywhere}
+.badge{border-radius:6px;padding:0 8px;font-size:13px;font-weight:600;background:var(--soft);color:var(--soft-ink)}
+.badge.no{background:var(--surface-2);color:var(--muted);font-variant-numeric:tabular-nums}
+.st{border-radius:999px;padding:0 10px;font-size:13px;font-weight:700}
+.st.pending{background:var(--pend-bg);color:var(--pend-ink)}.st.approved{background:var(--ok-bg);color:var(--ok-ink)}.st.rejected{background:var(--warn-bg);color:var(--warn-ink)}
+.meta{margin:6px 0 0;font-size:15px;color:var(--muted)}
+.subs{list-style:none;margin:12px 0 0;padding:0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.subs li{display:grid;grid-template-columns:62px 112px 1fr;gap:8px;padding:8px 12px;align-items:baseline;border-top:1px solid var(--line)}
+.subs li:first-child{border-top:0}
+.subs .pn{font-weight:700;color:var(--link)}.subs .pt{font-size:14px;color:var(--muted)}
+.subs .pp{min-width:0;overflow-wrap:anywhere}.subs .pp small{display:block;color:var(--muted);font-size:14px}
+.subs .none{color:var(--warn-ink);font-weight:600}
+.remark{margin:10px 0 0;font-size:15px;color:var(--muted);overflow-wrap:anywhere}
+.decision{margin:10px 0 0;padding:8px 12px;border-radius:10px;background:var(--surface-2);font-size:15px}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
+.acts input.dnote{flex:1 1 200px;min-height:38px}
+.del{color:var(--danger)}.del[data-armed="1"]{background:var(--danger);border-color:var(--danger);color:var(--surface)}
+.copybox{width:100%;margin-top:10px;min-height:150px;font-size:14px}
+.blank{text-align:center;color:var(--muted);padding:34px 12px;background:var(--surface);border:1px dashed var(--line-strong);border-radius:14px}
+.blank b{display:block;color:var(--ink);font-size:17px;margin-bottom:4px}
+.toast{position:fixed;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:420px;margin:0 auto;background:var(--ink);color:var(--bg);border-radius:12px;padding:12px 16px;text-align:center;font-weight:600;box-shadow:0 6px 22px rgba(0,0,0,.3);opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .2s,transform .2s;z-index:20}
+.toast.on{opacity:1;transform:none}
+#print{display:none}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;padding:16px;z-index:30}.modal .box{background:var(--surface);color:var(--ink);border:1px solid var(--line-strong);border-radius:14px;padding:20px;max-width:420px;width:100%}.modal p{margin:0 0 14px;font-weight:600}
+.subs select{margin-top:6px;min-height:38px}.subs .del{min-height:30px;padding:0 10px;margin-left:6px}
+.paper{background:#fff;color:#000;border:1px solid var(--line-strong);border-radius:6px;padding:28px 32px;font:16px/1.6 "Sarabun",sans-serif;max-width:794px;margin:0 auto;overflow-x:auto}
+.paper .t{text-align:center;font-weight:700;font-size:20px;margin:0 0 8px}
+.paper p{margin:0 0 8px}.paper p.no{text-align:right}.paper .ind{text-indent:2.2em;text-align:justify}
+.paper .sig{margin:16px 0 12px 40%;text-align:center}
+.paper table{width:100%;border-collapse:collapse;margin:8px 0;font-size:14px}.paper th,.paper td{border:1px solid #000;padding:3px 6px;text-align:center}
+.paper .two{display:grid;grid-template-columns:1fr 1fr;border:1px solid #000;margin-top:8px}.paper .two>div{padding:8px 10px;font-size:14px;min-height:120px}.paper .two>div+div{border-left:1px solid #000}
+@media (max-width:640px){.paper{padding:16px 14px;font-size:15px}.paper .sig{margin-left:15%}.paper .two{grid-template-columns:1fr}.paper .two>div+div{border-left:0;border-top:1px solid #000}}
+@media (max-width:640px){
+.grid2{grid-template-columns:1fr}.seg{grid-template-columns:1fr 1fr}.seg.r3{grid-template-columns:1fr}
+.prow{grid-template-columns:1fr;gap:6px}.plab{flex-direction:row;align-items:baseline;gap:10px}
+.subs li{grid-template-columns:auto 1fr;gap:2px 10px}.subs .pp{grid-column:1/-1}
+.band h1{font-size:19px}.card{padding:16px}.tabs a{font-size:14px;padding:9px 2px}
+.acts .btn{flex:1 1 auto}}
+@media (min-width:1100px){.band-in,.wrap{max-width:980px}}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+@media print{
+@page{size:A4;margin:16mm 18mm}
+html,body{background:#fff!important}
+.app,.toast{display:none!important}
+#print{display:block!important;color:#000;background:#fff;font:15pt/1.55 "Sarabun","TH Sarabun New",sans-serif}
+#print .t{text-align:center;font-weight:700;font-size:18pt;margin:0 0 6pt}
+#print .no{text-align:right;margin:0}
+#print p{margin:0 0 6pt}.ind{text-indent:2.2cm;text-align:justify}
+#print .sig{margin:14pt 0 10pt 8cm;text-align:center}
+#print table{width:100%;border-collapse:collapse;margin:8pt 0;font-size:13pt}
+#print th,#print td{border:1px solid #000;padding:2pt 6pt;text-align:center}
+#print .two{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid #000;margin-top:8pt}
+#print .two>div{padding:6pt 8pt;font-size:13pt;min-height:110pt}#print .two>div+div{border-left:1px solid #000}
+}
+
+@media screen{
+body{background:var(--bg);-webkit-font-smoothing:antialiased}
+.band{background:linear-gradient(135deg,#f7a655 0%,#e8702a 55%,#d4521c 100%);border:0;color:#fff;box-shadow:0 4px 18px rgba(212,82,28,.28)}
+.band-in{padding:16px}
+.seal{width:52px;height:52px;border:2px solid rgba(255,255,255,.85);background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.band h1{color:#fff;font:600 19px/1.4 var(--display);letter-spacing:.1px}
+.band .status{color:rgba(255,255,255,.9);background:rgba(255,255,255,.14);padding:4px 10px;border-radius:999px}
+.band .theme{border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.1)}
+.band .theme button{color:rgba(255,255,255,.85)}
+.band .theme button[aria-pressed="true"]{background:#fff;color:#c25a16}
+.band .me{color:#fff}
+.band .me .btn{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.4)}
+.band .me .btn:hover{background:rgba(255,255,255,.28)}
+.wrap{padding-top:22px}
+.tabs{position:sticky;top:8px;z-index:20;background:var(--surface);border:1px solid var(--line);box-shadow:0 6px 20px rgba(90,50,20,.08);border-radius:14px;padding:5px;overflow-x:auto;scrollbar-width:none;gap:4px}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{flex:1 0 auto;white-space:nowrap;padding:10px 14px;border-radius:10px;color:var(--muted);transition:.15s}
+.tabs a:hover{background:var(--soft);color:var(--soft-ink)}
+.tabs a[aria-current="page"]{background:var(--btn);color:var(--btn-ink);box-shadow:0 2px 8px rgba(232,112,42,.35)}
+.tabs a[aria-current="page"] .cnt{background:#fff;color:#c25a16}
+.cnt{background:#ef4444;color:#fff;font-weight:700;line-height:20px}
+h2{font:600 19px/1.4 var(--display);letter-spacing:.1px}
+.card{border-radius:18px;padding:22px;border:1px solid var(--line);box-shadow:0 1px 2px rgba(90,50,20,.04),0 8px 24px rgba(90,50,20,.05)}
+.hint{line-height:1.6}
+label.l{font-size:14px;color:var(--muted);font-weight:600}
+select,input[type=text],input[type=date],input[type=time],input[type=password],input[type=number],textarea{border-radius:12px;background:var(--surface-2);border:1px solid var(--line);transition:border-color .15s,box-shadow .15s,background .15s}
+select:focus,input:focus,textarea:focus{outline:0;background:var(--surface);border-color:var(--btn);box-shadow:0 0 0 4px color-mix(in srgb,var(--btn) 22%,transparent)}
+.seg span{border-radius:12px;background:var(--surface-2);border:1px solid var(--line);transition:.15s}
+.seg label:hover span{border-color:var(--btn)}
+.seg input:checked+span{background:var(--btn);box-shadow:0 4px 12px rgba(232,112,42,.3)}
+.btn{border-radius:12px;font-weight:600;border:1px solid transparent;background:var(--btn);color:var(--btn-ink);transition:transform .1s,box-shadow .15s,filter .15s}
+.btn:hover{filter:brightness(1.06);box-shadow:0 4px 12px rgba(232,112,42,.25)}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:transparent;color:var(--link);border-color:var(--line-strong);box-shadow:none}
+.btn.ghost:hover{background:var(--soft)}
+.btn.ghost.del,.btn.no{color:var(--danger)}
+.btn.no{background:transparent;border-color:color-mix(in srgb,var(--danger) 45%,transparent)}
+.btn.no:hover{background:var(--warn-bg)}
+.btn.ok{background:#16a34a;color:#fff}
+.btn.cta{min-height:50px;font-size:17px;width:100%}
+.reqc{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--btn);border-radius:16px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 2px rgba(90,50,20,.04),0 6px 18px rgba(90,50,20,.05)}
+.reqc .who strong{font:600 17px/1.4 var(--display)}
+.badge,.st{border-radius:999px;padding:2px 10px;font-size:13px;font-weight:600}
+.badge{background:var(--soft);color:var(--soft-ink)}
+.st.pending{background:var(--pend-bg);color:var(--pend-ink)}
+.st.approved{background:var(--ok-bg);color:var(--ok-ink)}
+.st.rejected{background:var(--warn-bg);color:var(--warn-ink)}
+.subs li{border-radius:10px}
+.chip{border-radius:999px;border:1px solid var(--line-strong);background:var(--surface);color:var(--muted);font-weight:600;transition:.15s}
+.chip[aria-pressed="true"]{background:var(--btn);border-color:var(--btn);color:var(--btn-ink)}
+.blank{border:2px dashed var(--line-strong);border-radius:18px;background:transparent;color:var(--muted)}
+.blank b{display:block;color:var(--ink);font-size:17px;margin-bottom:4px}
+.modal{backdrop-filter:blur(4px)}
+.modal .box{border-radius:20px;box-shadow:0 24px 60px rgba(90,50,20,.35);border:1px solid var(--line)}
+.toast{border-radius:999px;background:var(--ink);color:var(--bg);box-shadow:0 10px 30px rgba(90,50,20,.35)}
+.login{margin-top:36px}
+@media (max-width:560px){.wrap{padding:16px 12px 48px}.card{padding:16px;border-radius:16px}.grid2{grid-template-columns:1fr}.band h1{font-size:16px}}
+}
+
+@media screen{
+body{background:radial-gradient(620px 420px at 0% 0%,color-mix(in srgb,var(--btn) 26%,transparent),transparent 70%),radial-gradient(560px 460px at 100% 18%,color-mix(in srgb,#f5b942 24%,transparent),transparent 70%),radial-gradient(700px 500px at 40% 100%,color-mix(in srgb,#f08a5d 18%,transparent),transparent 70%),var(--bg);background-attachment:fixed}
+.card,.reqc,.tabs,.modal .box{background:color-mix(in srgb,var(--surface) 64%,transparent);-webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%);border:1px solid color-mix(in srgb,#fff 55%,var(--line));box-shadow:0 8px 30px rgba(120,60,20,.10),inset 0 1px 0 rgba(255,255,255,.6)}
+.reqc{border-left:5px solid var(--btn)}
+:root[data-theme="dark"] .card,:root[data-theme="dark"] .reqc,:root[data-theme="dark"] .tabs,:root[data-theme="dark"] .modal .box{border-color:color-mix(in srgb,#fff 12%,var(--line));box-shadow:0 8px 30px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.06)}
+.band{-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 8px 28px rgba(212,82,28,.28),inset 0 -1px 0 rgba(255,255,255,.25)}
+.seg span,.chip,select,input[type=text],input[type=date],input[type=time],input[type=password],input[type=number],textarea{background:color-mix(in srgb,var(--surface) 55%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.seg input:checked+span,.chip[aria-pressed="true"]{background:var(--btn)}
+.btn.ghost{background:color-mix(in srgb,var(--surface) 50%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.btn{box-shadow:0 4px 14px rgba(232,112,42,.28),inset 0 1px 0 rgba(255,255,255,.35)}
+.btn:hover{transform:translateY(-1px)}
+.badge{background:color-mix(in srgb,var(--soft) 80%,transparent)}
+/* pop-up */
+.modal{background:rgba(59,43,30,.38);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.modal:not([hidden]){animation:fade .2s ease both}
+.modal:not([hidden]) .box{animation:pop .34s cubic-bezier(.2,.9,.3,1.25) both}
+.toast{display:block!important;top:calc(14px + env(safe-area-inset-top,0px));bottom:auto;transform:translateY(-14px) scale(.92);background:color-mix(in srgb,var(--ink) 82%,transparent);color:var(--bg);-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);border-radius:999px;border:1px solid rgba(255,255,255,.18);transition:opacity .25s,transform .3s cubic-bezier(.2,.9,.3,1.3)}
+.toast.on{opacity:1;transform:none}
+.reqc,.card{animation:rise .4s cubic-bezier(.2,.8,.3,1) both}
+section:not([hidden]) > .card,#cards>.reqc:nth-child(2){animation-delay:.04s}
+@keyframes pop{0%{opacity:0;transform:scale(.82) translateY(18px)}100%{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.cnt{animation:bump 1.8s ease-in-out infinite}
+@keyframes bump{0%,86%,100%{transform:scale(1)}92%{transform:scale(1.25)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+}
+</style></head>
+<body>
+<div class="app" id="app">
+<header class="band"><div class="band-in">
+<img class="seal" src="data:image/jpeg;base64,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" alt="ตราสัญลักษณ์โรงเรียนบ้านแม่เฟือง" width="48" height="48">
+<div class="band-txt"><h1>ระบบการลาและสอนแทน โรงเรียนบ้านแม่เฟือง · สพป.ลำปาง เขต 1</h1></div>
+<div class="tools">
+<div class="theme" role="group" aria-label="ธีม"><button type="button" data-t="light" aria-pressed="false">สว่าง</button><button type="button" data-t="dark" aria-pressed="false">มืด</button><button type="button" data-t="auto" aria-pressed="true">ตามเครื่อง</button></div>
+<span class="status" id="status" data-m="connecting" role="status"><i></i><b>กำลังเชื่อมต่อ</b></span>
+<div class="me" id="me" hidden><span id="mename"></span><button type="button" class="btn small ghost" id="logout">ออกจากระบบ</button></div>
+</div></div></header>
+<main class="wrap">
+<section id="view-login" class="card login">
+<h2>เข้าสู่ระบบ</h2>
+<fieldset><legend class="hint">เข้าใช้งานในฐานะ</legend>
+<div class="seg" style="grid-template-columns:repeat(2,1fr)"><label><input type="radio" name="role" value="teacher" checked><span>ครู / บุคลากร</span></label><label><input type="radio" name="role" value="admin"><span>ผู้ดูแลระบบ</span></label></div></fieldset>
+<div class="fld" id="lteacher" style="margin-bottom:14px"><label class="l" for="lname">ชื่อ-สกุล</label><select id="lname"></select></div>
+<div class="fld" id="lstaff" style="margin-bottom:14px" hidden><label class="l" for="lstaffname">ชื่อ-สกุล</label><input type="text" id="lstaffname" autocomplete="name"></div>
+<div class="fld" style="margin-bottom:6px"><label class="l" for="lpin">รหัส PIN (ตัวเลข 4 หลักขึ้นไป)</label><input type="password" id="lpin" inputmode="numeric" autocomplete="current-password"></div>
+<p class="hint" id="lhint" style="margin:0 0 12px"></p>
+<p class="hint" style="margin:0 0 12px">ลืม PIN? ให้ ผอ. หรือฝ่ายบุคคลรีเซ็ตให้ในแท็บ “บัญชี” แล้วเข้าสู่ระบบเพื่อตั้ง PIN ใหม่</p>
+<p class="formerr" id="lerr" role="alert" hidden></p>
+<button type="button" class="btn cta" id="loginbtn">เข้าสู่ระบบ</button>
+</section>
+
+<div id="main" hidden>
+<nav class="tabs" aria-label="เมนูหลัก"><a href="#form" id="tab-form">แจ้งลา / ใบลา</a><a href="#list" id="tab-list">รายการ<span class="cnt" id="acnt" hidden>0</span></a><a href="#approve" id="tab-approve" hidden>รออนุมัติ<span class="cnt" id="pcnt">0</span></a><a href="#users" id="tab-users" hidden>จัดการผู้ใช้</a><a href="#acct" id="tab-acct">บัญชี</a></nav>
+
+<section id="view-form" hidden>
+<p class="notice" id="readonly" hidden>บัญชีนี้เปิดดูรายการได้อย่างเดียว ไม่สามารถบันทึกข้อมูลได้</p>
+<form id="f" novalidate>
+<div class="card"><h2>1. ข้อมูลการลา</h2>
+<div class="grid2" style="margin-bottom:14px">
+<div class="fld"><label class="l" for="leaver">ผู้ขอลา <span class="req">*</span></label><select id="leaver"></select></div>
+<div class="fld"><label class="l" for="pos">ตำแหน่ง</label><input type="text" id="pos" placeholder="เช่น ครู"></div></div>
+<div class="grid2" style="margin-bottom:14px">
+<div class="fld"><label class="l" for="type">ประเภท</label><select id="type"><option>ลาป่วย</option><option selected>ลากิจส่วนตัว</option><option>ลาพักผ่อน</option><option>ไปราชการ</option><option>ลาคลอดบุตร</option><option>อื่น ๆ</option></select><input type="text" id="other" placeholder="ระบุประเภทการลา" aria-label="ระบุประเภทการลา" hidden></div>
+<div class="fld"><label class="l" for="reason" id="reasonl">เหตุผล <span class="req">*</span></label><input type="text" id="reason" placeholder="เช่น ปวดศีรษะ มีไข้"></div></div>
+<div class="grid2">
+<div class="fld"><label class="l" for="date">ตั้งแต่วันที่ <span class="req">*</span></label><input type="date" id="date"><p class="datehint" id="datehint"></p></div>
+<div class="fld"><label class="l" for="end">ถึงวันที่ (ถ้าลาหลายวัน)</label><input type="date" id="end"><p class="datehint" id="daysinfo"></p></div></div>
+<div class="fld" style="margin-top:14px"><label class="l" for="contact">ระหว่างลาติดต่อได้ที่ (ไม่บังคับ)</label><input type="text" id="contact" placeholder="เบอร์โทร / ที่อยู่"></div>
+</div>
+<div class="card"><h2>2. ช่วงเวลาที่ลา <small class="hint" style="font-weight:400">(กรณีลาวันเดียว)</small></h2>
+<fieldset><legend style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">ช่วงเวลา</legend>
+<div class="seg"><label><input type="radio" name="kind" value="full" checked><span>เต็มวัน<small>คาบ 1–6</small></span></label><label><input type="radio" name="kind" value="am"><span>ครึ่งเช้า<small>คาบ 1–3</small></span></label><label><input type="radio" name="kind" value="pm"><span>ครึ่งบ่าย<small>คาบ 4–6</small></span></label><label><input type="radio" name="kind" value="custom"><span>ระบุเวลา<small>เลือกเอง</small></span></label></div></fieldset>
+<div class="custom" id="custom" hidden><div class="fld"><label class="l" for="from">ตั้งแต่เวลา</label><input type="time" id="from"></div><span style="padding-bottom:12px">ถึง</span><div class="fld"><label class="l" for="to">ถึงเวลา</label><input type="time" id="to"></div></div>
+<p class="hint" style="margin:12px 0 0">คาบ 1 เริ่ม 8.30 น. คาบ 6 เลิก 15.30 น. พักกลางวัน 11.30–12.30 น.</p></div>
+<div class="card"><h2>3. ครูที่มาสอนแทน <small class="hint" style="font-weight:400">(วันแรกของการลา)</small></h2>
+<div class="quick" id="quickbox" hidden><label for="quick">ให้ครูคนเดียวสอนแทนทุกคาบ</label><div class="fld"><select id="quick"></select></div></div>
+<div id="prows"></div><p class="progress" id="progress"></p></div>
+<div class="card"><h2>4. หมายเหตุ</h2><div class="fld"><label class="l" for="remark">งานที่มอบหมาย (ไม่บังคับ)</label><textarea id="remark" placeholder="เช่น ให้นักเรียนทำใบงานหน้า 12"></textarea></div></div>
+<p class="formerr" id="formerr" role="alert" hidden></p>
+<button class="btn cta" type="submit" id="save">ส่งใบลา (รออนุมัติ)</button>
+</form></section>
+
+<section id="view-list" hidden>
+<div id="mytasks"></div>
+<p class="today" id="today"></p>
+<div class="filters" id="filters">
+<button type="button" class="chip" data-range="today" aria-pressed="false">วันนี้</button><button type="button" class="chip" data-range="upcoming" aria-pressed="true">วันนี้เป็นต้นไป</button><button type="button" class="chip" data-range="past" aria-pressed="false">ที่ผ่านมา</button><button type="button" class="chip" data-range="all" aria-pressed="false">ทั้งหมด</button>
+<select id="tfilter" aria-label="กรองตามครู"></select>
+<select id="sfilter" aria-label="กรองตามสถานะ"><option value="">ทุกสถานะ</option><option value="pending">รออนุมัติ</option><option value="approved">อนุมัติแล้ว</option><option value="rejected">ไม่อนุมัติ</option></select></div>
+<div class="acts" id="exports" hidden style="margin:0 0 14px"><button type="button" class="btn small" id="csv1">ส่งออก CSV (ตามตัวกรอง)</button><button type="button" class="btn small ghost" id="csv2">สรุปรายคนทั้งปีงบประมาณ (CSV)</button></div>
+<div class="card" id="csvbox" hidden><h2 id="csvtitle">ตารางข้อมูล</h2><p class="hint">เบราว์เซอร์นี้บันทึกไฟล์ตรงไม่ได้ กด “คัดลอกตาราง” แล้ววางใน Excel หรือ Google Sheets คอลัมน์จะแยกให้อัตโนมัติ</p><textarea id="csvtext" class="copybox" readonly></textarea><div class="acts"><button type="button" class="btn small" id="csvcopy">คัดลอกตาราง</button><button type="button" class="btn small ghost" id="csvclose">ปิด</button></div></div>
+<div id="cards"></div></section>
+
+<section id="view-acct" hidden><div class="card" id="pincard"><h2>เปลี่ยน PIN ของฉัน</h2><div class="grid2"><div class="fld"><label class="l" for="oldpin">PIN เดิม</label><input type="password" id="oldpin" inputmode="numeric" autocomplete="current-password"></div><div class="fld"><label class="l" for="newpin">PIN ใหม่ (ตัวเลข 4 หลักขึ้นไป)</label><input type="password" id="newpin" inputmode="numeric" autocomplete="new-password"></div></div><p class="formerr" id="pinerr" role="alert" hidden style="margin-top:12px"></p><div class="acts"><button type="button" class="btn small" id="pinsave">บันทึก PIN ใหม่</button></div></div>
+</section>
+<section id="view-users" hidden><h2>จัดการผู้ใช้</h2><p class="hint">เฉพาะผู้ดูแลระบบ: นำชื่อครูเข้า/ออก (ถามยืนยันทุกครั้ง) และรีเซ็ต PIN</p><div class="card" id="rosterbox" hidden><h2>รายชื่อและสิทธิ์ผู้ใช้</h2><p class="hint">กำหนดสิทธิ์ของแต่ละคน (ครู / ผู้อำนวยการ / ฝ่ายบุคคล) ครูทั่วไปจะไม่เห็นแท็บอนุมัติและเมนูของ ผอ. นำชื่อครูเข้าหรือออกจากระบบ (ประวัติใบลาเดิมยังอยู่) การนำออกจะถามยืนยันทุกครั้ง</p><div class="addrow" style="margin-bottom:10px"><input type="text" id="newteacher" placeholder="พิมพ์ชื่อ-สกุลครู" aria-label="ชื่อครูที่เพิ่ม"><button type="button" class="btn small" id="addteacher">＋ นำชื่อเข้า</button></div><div id="rosterlist"></div></div>
+<div class="card" id="resetbox" hidden><h2>รีเซ็ต PIN ผู้ใช้</h2><p class="hint">ใช้เมื่อมีคนลืม PIN หลังรีเซ็ต ผู้ใช้เลือกชื่อแล้วกรอก PIN ใหม่ที่หน้าเข้าสู่ระบบ ระบบจะตั้งให้เป็น PIN ของบัญชีนั้น</p><div id="resetlist"></div></div><div class="card" id="removedbox" hidden><h2>ชื่อที่นำออกแล้ว</h2><div id="removedlist"></div></div></section>
+<section id="view-doc" hidden><div class="acts" style="margin:0 0 12px"><button type="button" class="btn small ghost" id="docback">← กลับไปรายการ</button><button type="button" class="btn small" id="docprint">พิมพ์ / บันทึกเป็น PDF</button></div><div class="paper" id="docpage"></div></section>
+<section id="view-approve" hidden>
+<h2>ใบลารออนุมัติ</h2><p class="hint">ตรวจสอบแล้วกดอนุมัติหรือไม่อนุมัติได้ทันที ผลจะแสดงให้ครูเห็นและพิมพ์ในใบลาอัตโนมัติ</p>
+<div id="acards"></div></section>
+</div>
+</main></div>
+<div id="print" aria-hidden="true"></div>
+<div class="modal" id="dlg" hidden role="dialog" aria-modal="true" aria-labelledby="dlgmsg"><div class="box"><p id="dlgmsg"></p><div class="acts"><button type="button" class="btn small no" id="dlgok">ยืนยัน</button><button type="button" class="btn small ghost" id="dlgno">ยกเลิก</button></div></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){"use strict";
+var BASE=["นางสุจิตรา คณะธรรม","นางกวิสรา ชูวงศ์","นางสาวรติกุล กัลปสันติ","นางหนึ่งฤทัย สิริกุลพิบูลย์","นายณัฐพงศ์ กุญชร","นายทรงธรรม เจริญค้า","นายนิคม จันทบ","นางสาวกุลสตรี มณีกุล"];
+var PERIODS=[{n:1,s:"08:30",e:"09:30"},{n:2,s:"09:30",e:"10:30"},{n:3,s:"10:30",e:"11:30"},{n:4,s:"12:30",e:"13:30"},{n:5,s:"13:30",e:"14:30"},{n:6,s:"14:30",e:"15:30"}];
+var DAYS=["อาทิตย์","จันทร์","อังคาร","พุธ","พฤหัสบดี","ศุกร์","เสาร์"];
+var MONTHS=["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"];
+var KINDLABEL={full:"เต็มวัน",am:"ครึ่งเช้า",pm:"ครึ่งบ่าย"};
+var CODE={"ลาป่วย":"ลป","ลากิจส่วนตัว":"ลก","ลาพักผ่อน":"ลพ","ไปราชการ":"ปร","ลาคลอดบุตร":"ลค"};
+var STL={pending:"รออนุมัติ",approved:"อนุมัติแล้ว",rejected:"ไม่อนุมัติ"};
+var ROLEL={teacher:"ครู",director:"ผู้อำนวยการ",hr:"ฝ่ายบุคคล",admin:"ผู้ดูแลระบบ"};
+var LS="mf-subs-v1";
+function $(s,r){return (r||document).querySelector(s)}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function pad(n,l){return String(n).padStart(l||2,"0")}
+function hm(t){return t.replace(/^0/,"").replace(":",".")}
+function iso(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())}
+function todayISO(){return iso(new Date())}
+function P(i){var p=i.split("-").map(Number);return new Date(p[0],p[1]-1,p[2])}
+function thDate(i){var d=P(i);return "วัน"+DAYS[d.getDay()]+"ที่ "+d.getDate()+" "+MONTHS[d.getMonth()]+" "+(d.getFullYear()+543)}
+function thLong(i){var d=P(i);return d.getDate()+" "+MONTHS[d.getMonth()]+" "+(d.getFullYear()+543)}
+function thNum(i){var d=P(i);return pad(d.getDate())+"/"+pad(d.getMonth()+1)+"/"+(d.getFullYear()+543)}
+function fy(i){var d=P(i);return d.getFullYear()+543+(d.getMonth()>=9?1:0)}
+function toMin(t){var p=t.split(":").map(Number);return p[0]*60+p[1]}
+function periodsFor(k,f,t){
+ if(k==="full")return [1,2,3,4,5,6];if(k==="am")return [1,2,3];if(k==="pm")return [4,5,6];
+ if(!f||!t)return [];var a=toMin(f),b=toMin(t);
+ return PERIODS.filter(function(p){return toMin(p.s)<b&&toMin(p.e)>a}).map(function(p){return p.n})}
+function calcDays(d,e,kind,np){
+ if(!d)return 0;
+ if(!e||e<=d){return kind==="full"?1:kind==="custom"?Math.max(.5,Math.round(np/6*2)/2):.5}
+ var n=0,x=P(d),y=P(e);while(x<=y){var w=x.getDay();if(w!==0&&w!==6)n++;x.setDate(x.getDate()+1)}return n}
+function fmtN(n){return n%1?String(n).replace(".5",".5"):String(n)}
+
+var roles={},requests=[],extra=[],accts={},db=null,canWrite=true,accLoaded=false,sess=null,range="upcoming",tFilter="",sFilter="",sig="",lastItems=[];
+var F={leaver:"",date:todayISO(),end:"",type:"ลากิจส่วนตัว",other:"",kind:"full",from:"08:30",to:"10:30"};
+var assign={};
+
+function allTeachers(){var rm={};extra.forEach(function(e){if(e.removed)rm[e.name]=1});var o=[];BASE.concat(extra.map(function(e){return e.name})).forEach(function(n){if(!rm[n]&&o.indexOf(n)<0)o.push(n)});return o}
+function opts(sel,ex,ph){return '<option value="">'+esc(ph)+'</option>'+allTeachers().filter(function(n){return n!==ex}).map(function(n){return '<option value="'+esc(n)+'"'+(n===sel?" selected":"")+'>'+esc(n)+'</option>'}).join("")+'<option value="__new__">＋ เพิ่มรายชื่อเอง…</option>'}
+function isDir(){return sess&&sess.role==="director"}
+function isStaff(){return sess&&sess.role!=="teacher"}
+function st(r){return r.status||""}
+
+/* ---------- theme ---------- */
+function applyTheme(t){document.documentElement.setAttribute("data-theme",t);try{localStorage.setItem("mf-theme",t)}catch(e){}
+ $$(".theme button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.t===t?"true":"false")})}
+$(".theme").addEventListener("click",function(e){var b=e.target.closest("button");if(b)applyTheme(b.dataset.t)});
+try{applyTheme(localStorage.getItem("mf-theme")||"auto")}catch(e){}
+
+/* ---------- storage ---------- */
+function setStatus(m){var el=$("#status");el.dataset.m=m;$("b",el).textContent={connecting:"กำลังเชื่อมต่อ",shared:"ข้อมูลใช้ร่วมกัน",local:"บันทึกในเครื่องนี้",offline:"ขาดการเชื่อมต่อ"}[m]}
+function lsLoad(){try{var o=JSON.parse(localStorage.getItem(LS)||"{}");requests=o.requests||[];extra=o.extra||[];accts=o.accts||{};roles=o.roles||{}}catch(e){}}
+function lsSave(){try{localStorage.setItem(LS,JSON.stringify({requests:requests,extra:extra,accts:accts,roles:roles}))}catch(e){}}
+function useLocal(){db=null;lsLoad();accLoaded=true;setStatus("local");loginSync();afterData()}
+function afterData(){syncRole();refreshTeacherUI();renderAll()}
+async function connect(){
+ var c=window.claude;if(!c||!c.use){useLocal();return}
+ try{db=await c.use("db")}catch(e){db=null}
+ if(!db){useLocal();return}
+ try{var u=await c.use("user");var w=u&&u.can?await u.can("data.write"):null;if(w===false)canWrite=false}catch(e){}
+ $("#readonly").hidden=canWrite;$("#save").disabled=!canWrite;setStatus("shared");
+ db.collection("requests").onSnapshot(function(s){requests=s.docs.map(function(d){var o=d.data()||{};o.id=d.id;return o});renderAll();updateWarns()},function(){setStatus("offline")});
+ db.collection("teachers").onSnapshot(function(s){extra=s.docs.map(function(d){return {id:d.id,name:String((d.data()||{}).name||""),removed:!!(d.data()||{}).removed}}).filter(function(e){return e.name});afterData()},function(){});
+ db.collection("roles").onSnapshot(function(s){roles={};s.docs.forEach(function(d){var o=d.data()||{};if(o.name)roles[o.name]=o.role||"teacher"});syncRole();if(sess)renderAll()},function(){});
+ db.collection("accounts").onSnapshot(function(s){accts={};s.docs.forEach(function(d){accts[d.id]=d.data()||{}});accLoaded=true;loginSync();if(sess)renderReset()},function(){accLoaded=true;loginSync()});
+}
+async function addRequest(r){if(db){await db.collection("requests").add(r)}else{r.id="l"+Date.now();requests.push(r);lsSave();renderAll()}}
+async function updRequest(id,patch){
+ if(db){await db.doc("requests/"+id).update(patch)}
+ else{requests.forEach(function(x){if(x.id===id)Object.assign(x,patch)});lsSave();renderAll()}}
+async function delRequest(id){if(db){await db.doc("requests/"+id).delete()}else{requests=requests.filter(function(x){return x.id!==id});lsSave();renderAll()}}
+async function addTeacher(name){
+ if(allTeachers().indexOf(name)>=0)return;
+ var ex=extra.filter(function(e){return e.name===name})[0];
+ if(ex){ex.removed=false;if(db){await db.doc("teachers/"+ex.id).set({name:name,removed:false})}else lsSave();return}
+ var o={id:"t"+Date.now(),name:name,removed:false};extra.push(o);if(db){await db.collection("teachers").add({name:name,removed:false})}else lsSave()}
+async function removeTeacher(name){
+ var ex=extra.filter(function(e){return e.name===name})[0];
+ if(ex){ex.removed=true;if(db){await db.doc("teachers/"+ex.id).set({name:name,removed:true})}else lsSave();return}
+ var o={id:"x"+h32(name),name:name,removed:true};extra.push(o);if(db){await db.doc("teachers/"+o.id).set({name:name,removed:true})}else lsSave()}
+var RL3={teacher:"ครู",director:"ผู้อำนวยการ",hr:"ฝ่ายบุคคล"};
+function roleOf(n){var r=roles[n];return r==="director"||r==="hr"?r:"teacher"}
+async function setRole(name,role){roles[name]=role;if(db)await db.doc("roles/r"+h32(name)).set({name:name,role:role});else lsSave()}
+function applyRoleUI(){$("#tab-approve").hidden=!isDir();$("#mename").textContent=sess.name+" ("+ROLEL[sess.role]+")";$("#leaver").disabled=sess.role==="teacher";if(sess.role==="teacher")F.leaver=sess.name}
+function syncRole(){if(!sess||sess.role==="admin")return;var r=roleOf(sess.name);if(r===sess.role)return;sess.role=r;try{sessionStorage.setItem("mf-sess",JSON.stringify(sess))}catch(e){}
+ if(!$("#main").hidden){applyRoleUI();fillLeaver();fillQuick();renderRows();renderAll();route()}}
+async function setAcct(id,o){accts[id]=o;if(db){await db.doc("accounts/"+id).set(o)}else lsSave()}
+
+/* ---------- login ---------- */
+function h32(s){var h=5381;for(var i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))|0;return (h>>>0).toString(36)}
+async function hashPin(p){try{var b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode("mf|"+p));return Array.prototype.map.call(new Uint8Array(b),function(x){return pad(x.toString(16))}).join("")}catch(e){return "x"+h32("mf|"+p)}}
+var ADMIN_USER="Admin",ADMIN_PASS="1234"; /* ผู้ดูแลระบบมีได้คนเดียว */
+function curRole(){return $('input[name="role"]:checked').value}
+function curAcctId(){var r=curRole();return r==="teacher"?"t"+h32($("#lname").value||"?"):r}
+function loginSync(){
+ var r=curRole(),t=r==="teacher";$("#lteacher").hidden=!t;$("#lstaff").hidden=t;
+ var id=curAcctId(),a=accts[id];
+ var ad=r==="admin";$('label[for="lstaffname"]').textContent=ad?"ชื่อผู้ใช้":"ชื่อ-สกุล";$('label[for="lpin"]').textContent=ad?"รหัสผ่าน":"รหัส PIN (ตัวเลข 4 หลักขึ้นไป)";
+ if(!t&&!ad&&a&&a.name&&!$("#lstaffname").value)$("#lstaffname").value=a.name;
+ $("#lhint").textContent=ad?"":!accLoaded?"กำลังโหลดข้อมูลบัญชี…":(a?"":"ยังไม่เคยตั้งรหัส: PIN ที่กรอกครั้งนี้จะถูกตั้งเป็นรหัสของบัญชีนี้");
+}
+function lerr(m){var e=$("#lerr");e.textContent=m;e.hidden=!m}
+function fillLogin(){var v=$("#lname").value;$("#lname").innerHTML='<option value="">— เลือกชื่อ —</option>'+allTeachers().map(function(n){return '<option value="'+esc(n)+'">'+esc(n)+'</option>'}).join("");$("#lname").value=v}
+async function doLogin(){
+ lerr("");var r=curRole(),pin=$("#lpin").value.trim(),name=r==="teacher"?$("#lname").value:$("#lstaffname").value.replace(/\s+/g," ").trim();
+ if(r==="admin"){if(name.toLowerCase()!==ADMIN_USER.toLowerCase()||pin!==ADMIN_PASS)return lerr("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
+  sess={role:"admin",name:ADMIN_USER};try{sessionStorage.setItem("mf-sess",JSON.stringify(sess))}catch(e){}$("#lpin").value="";enterApp();return}
+ if(!name)return lerr(r==="teacher"?"กรุณาเลือกชื่อครู":"กรุณากรอกชื่อ-สกุล");
+ if(!/^\d{4,}$/.test(pin))return lerr("PIN ต้องเป็นตัวเลขอย่างน้อย 4 หลัก");
+ if(!accLoaded)return lerr("กำลังโหลดข้อมูล ลองใหม่ในอีกสักครู่");
+ var id=curAcctId(),a=accts[id],h=await hashPin(pin);
+ if(!a){try{await setAcct(id,{pin:h,name:name})}catch(e){return lerr("ตั้งรหัสไม่สำเร็จ ลองใหม่อีกครั้ง")}}
+ else if(a.pin!==h)return lerr("PIN ไม่ถูกต้อง");
+ sess={role:roleOf(name),name:name};try{sessionStorage.setItem("mf-sess",JSON.stringify(sess))}catch(e){}
+ $("#lpin").value="";enterApp();
+}
+function enterApp(){
+ $("#view-login").hidden=true;$("#main").hidden=false;$("#me").hidden=false;
+ $("#mename").textContent=sess.name+" ("+ROLEL[sess.role]+")";
+ $("#tab-approve").hidden=!isDir();$("#tab-users").hidden=sess.role!=="admin";$("#pincard").hidden=sess.role==="admin";$("#exports").hidden=false;
+ var tl=sess.role==="teacher";$("#leaver").disabled=tl;
+ if(tl)F.leaver=sess.name;
+ try{$("#pos").value=localStorage.getItem("mf-pos-"+F.leaver)||"ครู"}catch(e){$("#pos").value="ครู"}
+ fillLeaver();fillQuick();renderRows();renderAll();route()}
+function logout(){sess=null;try{sessionStorage.removeItem("mf-sess")}catch(e){}
+ $("#main").hidden=true;$("#me").hidden=true;$("#view-login").hidden=false;F.leaver="";loginSync()}
+$("#loginbtn").addEventListener("click",doLogin);
+$("#lpin").addEventListener("keydown",function(e){if(e.key==="Enter")doLogin()});
+$("#logout").addEventListener("click",logout);
+$$('input[name="role"]').forEach(function(r){r.addEventListener("change",function(){lerr("");$("#lstaffname").value="";loginSync()})});
+$("#lname").addEventListener("change",loginSync);
+
+/* ---------- form ---------- */
+function fillLeaver(){$("#leaver").innerHTML=opts(F.leaver,"","— เลือกผู้ขอลา —")}
+function fillQuick(){$("#quick").innerHTML=opts("",F.leaver,"— เลือกครู —")}
+function refreshTeacherUI(){var s=allTeachers().join("|");if(s===sig)return;sig=s;fillLogin();fillLeaver();fillQuick();renderRows()}
+function conflictFor(date,n,sub){
+ if(!sub)return "";
+ for(var i=0;i<requests.length;i++){var r=requests[i];if(r.date!==date||st(r)==="rejected")continue;var ps=r.periods||[];
+  if(r.leaver===sub&&ps.some(function(p){return p.n===n}))return sub+" ลาในคาบนี้อยู่แล้ว (ตามรายการที่แจ้งไว้)";
+  if(ps.some(function(p){return p.n===n&&p.sub===sub}))return sub+" ถูกมอบหมายสอนแทน "+r.leaver+" ในคาบนี้แล้ว"}
+ return ""}
+function curPeriods(){return periodsFor(F.kind,F.from,F.to)}
+function renderRows(){
+ var ps=curPeriods(),box=$("#prows");$("#quickbox").hidden=ps.length<2;
+ if(!ps.length){box.innerHTML='<p class="empty">'+(F.kind==="custom"?"ช่วงเวลานี้ไม่ตรงกับคาบเรียนใด":"เลือกช่วงเวลาที่ลา")+'</p>';$("#progress").textContent="";updDays();return}
+ var h="";ps.forEach(function(n){
+  if(n===4&&ps.indexOf(3)>=0)h+='<div class="lunch">พักกลางวัน 11.30–12.30 น.</div>';
+  var p=PERIODS[n-1],a=assign[n]||{};
+  h+='<div class="prow" data-n="'+n+'"><div class="plab"><b>คาบ '+n+'</b><span>'+hm(p.s)+'–'+hm(p.e)+' น.</span></div><div class="fld pctl"><select data-role="sub" aria-label="ครูสอนแทนคาบ '+n+'">'+opts(a.sub||"",F.leaver,"— เลือกครูสอนแทน —")+'</select><input type="text" data-role="note" value="'+esc(a.note||"")+'" placeholder="ชั้น / วิชา (ไม่บังคับ)" aria-label="ชั้นหรือวิชา คาบ '+n+'"><p class="warn" data-warn hidden></p>'+(a.sub?'<button type="button" class="btn small ghost del" data-fx="'+n+'" aria-label="นำ '+esc(a.sub)+' ออกจากคาบ '+n+'">✕ นำ '+esc(a.sub)+' ออก</button>':'')+'</div></div>'});
+ box.innerHTML=h;updateWarns();updDays()}
+function updateWarns(){
+ var ps=curPeriods(),done=0;
+ $$("#prows .prow").forEach(function(row){var n=+row.dataset.n,a=assign[n]||{},w=conflictFor(F.date,n,a.sub),el=$("[data-warn]",row);el.hidden=!w;el.textContent=w;if(a.sub)done++});
+ $("#progress").textContent=ps.length?"มอบหมายแล้ว "+done+" จาก "+ps.length+" คาบ":""}
+function updDays(){var d=calcDays(F.date,F.end,F.kind,curPeriods().length);$("#daysinfo").textContent=F.date?"รวม "+fmtN(d)+" วัน":""}
+function promptNew(sel,onDone,onCancel){
+ var old=sel.parentElement.querySelector(".addrow");if(old)old.remove();
+ var row=document.createElement("div");row.className="addrow";
+ row.innerHTML='<input type="text" placeholder="พิมพ์ชื่อ-สกุล" aria-label="ชื่อครูที่เพิ่ม"><button type="button" class="btn small" data-a="ok">เพิ่ม</button><button type="button" class="btn small ghost" data-a="no">ยกเลิก</button>';
+ sel.after(row);var inp=$("input",row);inp.focus();
+ function ok(){var name=inp.value.replace(/\s+/g," ").trim();if(!name){inp.focus();return}row.remove();addTeacher(name).catch(function(){toast("บันทึกชื่อไม่สำเร็จ")});sig="";onDone(name)}
+ row.addEventListener("click",function(e){var a=e.target.getAttribute&&e.target.getAttribute("data-a");if(a==="ok")ok();if(a==="no"){row.remove();onCancel()}});
+ inp.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();ok()}if(e.key==="Escape"){row.remove();onCancel()}})}
+function setLeaver(v){F.leaver=v;Object.keys(assign).forEach(function(n){if(assign[n].sub===v)assign[n].sub=""});
+ try{$("#pos").value=localStorage.getItem("mf-pos-"+v)||"ครู"}catch(e){}fillLeaver();fillQuick();renderRows()}
+function setDateHint(){$("#datehint").textContent=F.date?thDate(F.date):""}
+function syncKind(){$("#custom").hidden=F.kind!=="custom"}
+function syncType(){
+ var pr=F.type==="ไปราชการ";$("#reasonl").innerHTML=(pr?"ไปราชการเพื่อ":"เหตุผล")+' <span class="req">*</span>';
+ $("#reason").placeholder=pr?"เช่น อบรมที่ สพป.ลำปาง เขต 1":F.type==="ลาป่วย"?"เช่น ปวดศีรษะ มีไข้":"ระบุเหตุผลการลา";$("#other").hidden=F.type!=="อื่น ๆ"}
+$("#leaver").addEventListener("change",function(e){var v=e.target.value;if(v==="__new__"){promptNew(e.target,setLeaver,function(){e.target.value=F.leaver});return}setLeaver(v)});
+$("#date").addEventListener("input",function(e){F.date=e.target.value;setDateHint();updateWarns();updDays()});
+$("#end").addEventListener("input",function(e){F.end=e.target.value;updDays()});
+$("#type").addEventListener("change",function(e){F.type=e.target.value;syncType()});
+$("#other").addEventListener("input",function(e){F.other=e.target.value});
+$$('input[name="kind"]').forEach(function(r){r.addEventListener("change",function(){F.kind=r.value;syncKind();renderRows()})});
+$("#from").addEventListener("input",function(e){F.from=e.target.value;renderRows()});
+$("#to").addEventListener("input",function(e){F.to=e.target.value;renderRows()});
+function applyAll(name){curPeriods().forEach(function(n){assign[n]=assign[n]||{};assign[n].sub=name});fillQuick();renderRows()}
+$("#quick").addEventListener("change",function(e){var v=e.target.value;if(v==="__new__"){promptNew(e.target,applyAll,function(){e.target.value=""});return}if(v)applyAll(v)});
+$("#prows").addEventListener("click",function(e){var b=e.target.closest("button[data-fx]");if(!b)return;var n=+b.dataset.fx,a=assign[n];if(!a||!a.sub)return;
+ ask("นำชื่อ “"+a.sub+"” ออกจากคาบ "+n+" ใช่หรือไม่?","นำออก").then(function(ok){if(ok){a.sub="";fillQuick();renderRows();toast("นำชื่อออกแล้ว")}})});
+$("#prows").addEventListener("change",function(e){var t=e.target;if(t.getAttribute("data-role")!=="sub")return;var n=+t.closest(".prow").dataset.n;assign[n]=assign[n]||{};
+ if(t.value==="__new__"){promptNew(t,function(name){assign[n].sub=name;renderRows()},function(){t.value=assign[n].sub||""});return}
+ assign[n].sub=t.value;updateWarns()});
+$("#prows").addEventListener("input",function(e){var t=e.target;if(t.getAttribute("data-role")!=="note")return;var n=+t.closest(".prow").dataset.n;assign[n]=assign[n]||{};assign[n].note=t.value});
+$("#f").addEventListener("keydown",function(e){if(e.key==="Enter"&&e.target.tagName==="INPUT"&&e.target.type!=="submit")e.preventDefault()});
+function formError(m){var el=$("#formerr");el.textContent=m;el.hidden=!m;if(m)el.scrollIntoView({block:"center",behavior:"smooth"})}
+function nextNo(code,year){
+ var mx=0;requests.forEach(function(r){if(r.code===code&&r.fy===year&&r.seq>mx)mx=r.seq});
+ return mx+1}
+$("#f").addEventListener("submit",async function(e){
+ e.preventDefault();formError("");
+ if(!F.leaver)return formError("กรุณาเลือกผู้ขอลา");
+ if(!F.date)return formError("กรุณาเลือกวันที่ลา");
+ if(F.end&&F.end<F.date)return formError("วันที่สิ้นสุดต้องไม่ก่อนวันที่เริ่ม");
+ if(F.type==="อื่น ๆ"&&!F.other.trim())return formError("กรุณาระบุประเภทการลา");
+ var reason=$("#reason").value.trim();if(!reason)return formError("กรุณากรอกเหตุผล");
+ var ps=curPeriods();if(!ps.length)return formError("ช่วงเวลาที่เลือกไม่ตรงกับคาบเรียนใด");
+ if(F.kind==="custom"&&toMin(F.to)<=toMin(F.from))return formError("เวลาสิ้นสุดต้องมาหลังเวลาเริ่มต้น");
+ var type=F.type==="อื่น ๆ"?F.other.trim():F.type,code=CODE[type]||"ลอ",year=fy(todayISO()),seq=nextNo(code,year),pos=$("#pos").value.trim()||"ครู";
+ try{localStorage.setItem("mf-pos-"+F.leaver,pos)}catch(e2){}
+ var req={code:code,fy:year,seq:seq,no:code+" "+pad(seq,3)+"/"+year,leaver:F.leaver,pos:pos,date:F.date,end:F.end&&F.end>F.date?F.end:"",
+  days:calcDays(F.date,F.end,F.kind,ps.length),leaveType:type,reason:reason,contact:$("#contact").value.trim(),
+  kind:F.kind,from:F.kind==="custom"?F.from:null,to:F.kind==="custom"?F.to:null,
+  periods:ps.map(function(n){var a=assign[n]||{};return {n:n,sub:a.sub||"",note:(a.note||"").trim()}}),
+  remark:$("#remark").value.trim(),status:"pending",createdAt:new Date().toISOString(),createdBy:sess?sess.name:""};
+ var b=$("#save");b.disabled=true;
+ try{await addRequest(req);Object.keys(assign).forEach(function(k){delete assign[k]});
+  $("#remark").value="";$("#reason").value="";$("#contact").value="";F.end="";$("#end").value="";
+  if(isStaff())F.leaver="";fillLeaver();fillQuick();renderRows();range="all";syncChips();toast("ส่งใบลาแล้ว เลขที่ "+req.no);printForm(req)}
+ catch(err){formError("บันทึกไม่สำเร็จ ตรวจสอบการเชื่อมต่อแล้วลองใหม่")}
+ b.disabled=!canWrite});
+
+/* ---------- list / approve ---------- */
+function timeLabel(r){if(r.kind==="custom"&&r.from&&r.to)return hm(r.from)+"–"+hm(r.to)+" น.";return KINDLABEL[r.kind]||""}
+function rangeLabel(r){return r.end?thLong(r.date)+" – "+thLong(r.end):thLong(r.date)}
+function summaryText(r){
+ var l=["แจ้งสอนแทน โรงเรียนบ้านแม่เฟือง"+(r.no?" ("+r.no+")":""),thDate(r.date),"ครูที่ลา: "+r.leaver+" ("+r.leaveType+" · "+timeLabel(r)+")"];
+ (r.periods||[]).forEach(function(p){var t=PERIODS[p.n-1];l.push("คาบ "+p.n+" ("+hm(t.s)+"–"+hm(t.e)+" น.) → "+(p.sub||"ยังไม่มีผู้สอนแทน")+(p.note?" ["+p.note+"]":""))});
+ if(r.remark)l.push("หมายเหตุ: "+r.remark);return l.join("\n")}
+function canDel(r){return isStaff()||(sess&&sess.name===r.leaver&&st(r)!=="approved")}
+function cardHTML(r,mode){
+ var s=st(r),h='<article class="reqc" data-id="'+esc(r.id)+'"><div class="who"><strong>'+esc(r.leaver)+'</strong><span class="badge">'+esc(r.leaveType)+'</span><span class="badge">'+esc(timeLabel(r))+'</span>'
+  +(s?'<span class="st '+s+'">'+STL[s]+'</span>':'')+(r.no?'<span class="badge no">เลขที่ '+esc(r.no)+'</span>':'')+'</div>';
+ h+='<p class="meta">'+esc(rangeLabel(r))+(r.days?' · '+fmtN(r.days)+' วัน':'')+(r.reason?' · '+esc(r.reason):'')+'</p><ul class="subs">';
+ (r.periods||[]).forEach(function(p){var pt=PERIODS[p.n-1]||{s:"00:00",e:"00:00"};
+  h+='<li><span class="pn">คาบ '+p.n+'</span><span class="pt">'+hm(pt.s)+'–'+hm(pt.e)+' น.</span><span class="pp">'+(p.sub?esc(p.sub)+(p.ack?' <span class="st approved">รับทราบแล้ว'+(typeof p.ack==="string"&&p.ack.length>9?' '+esc(thNum(p.ack.slice(0,10))):'')+'</span>':' <span class="st pending">รอรับทราบ</span>')+(canRm(r)?' <button type="button" class="btn small ghost del" data-act="rmsub" data-n="'+p.n+'" aria-label="นำ '+esc(p.sub)+' ออกจากคาบ '+p.n+'" title="นำชื่อออก">✕</button>':''):'<span class="none">ยังไม่มีผู้สอนแทน</span>'+(canSub(r)?'<select data-addsub="'+p.n+'" aria-label="เพิ่มครูสอนแทนคาบ '+p.n+'">'+subOpts(r)+'</select>':''))+(p.note?'<small>'+esc(p.note)+'</small>':'')+'</span></li>'});
+ h+='</ul>'+(r.remark?'<p class="remark">หมายเหตุ: '+esc(r.remark)+'</p>':'');
+ if(r.decidedBy)h+='<p class="decision"><b>'+STL[s]+'</b> โดย '+esc(r.decidedBy)+' เมื่อ '+esc(thLong(r.decidedAt.slice(0,10)))+(r.dnote?' · '+esc(r.dnote):'')+'</p>';
+ h+='<div class="acts">';
+ if(isDir()&&s==="pending"){if(mode==="appr")h+='<input type="text" class="dnote" placeholder="ความเห็น/เหตุผล (ไม่บังคับ)" aria-label="ความเห็นผู้อำนวยการ">';
+  h+='<button type="button" class="btn small ok" data-act="ok">อนุมัติ</button><button type="button" class="btn small no" data-act="no">ไม่อนุมัติ</button>'}
+ h+='<button type="button" class="btn small" data-act="print">พิมพ์ใบลา</button>';
+ h+='<button type="button" class="btn small ghost" data-act="copy">คัดลอกข้อความ</button>'+(canDel(r)?'<button type="button" class="btn small ghost del" data-act="del">ลบ</button>':'')+'</div></article>';
+ return h}
+function syncChips(){$$("#filters .chip").forEach(function(c){c.setAttribute("aria-pressed",c.dataset.range===range?"true":"false")})}
+function renderAll(){if(!sess)return;renderTasks();renderList();renderAppr();renderReset();renderRoster();renderRemoved();renderAck()}
+function renderList(){
+ var t=todayISO();
+ var td=requests.filter(function(r){return r.date===t&&st(r)!=="rejected"}),people={};td.forEach(function(r){people[r.leaver]=1});
+ var open=td.reduce(function(s,r){return s+(r.periods||[]).filter(function(p){return !p.sub}).length},0);
+ $("#today").innerHTML=td.length?'<b>วันนี้</b><span>ครูลา '+Object.keys(people).length+' คน</span>'+(open?'<span class="pill warn">ยังไม่มีผู้สอนแทน '+open+' คาบ</span>':'<span class="pill ok">มอบหมายครบแล้ว</span>'):'<b>วันนี้</b><span>ไม่มีครูลา</span>';
+ var names={};allTeachers().forEach(function(n){names[n]=1});requests.forEach(function(r){if(r.leaver)names[r.leaver]=1;(r.periods||[]).forEach(function(p){if(p.sub)names[p.sub]=1})});
+ var tf=$("#tfilter");tf.innerHTML='<option value="">ครูทุกคน</option>'+Object.keys(names).map(function(n){return '<option value="'+esc(n)+'">'+esc(n)+'</option>'}).join("");tf.value=tFilter;
+ var items=requests.filter(function(r){
+  if(!r.date)return false;if(range==="today"&&r.date!==t)return false;if(range==="upcoming"&&(r.end||r.date)<t)return false;if(range==="past"&&r.date>=t)return false;
+  if(sFilter&&st(r)!==sFilter)return false;
+  if(tFilter&&r.leaver!==tFilter&&!(r.periods||[]).some(function(p){return p.sub===tFilter}))return false;return true});
+ var asc=range==="today"||range==="upcoming";
+ items.sort(function(a,b){if(a.date!==b.date)return asc?(a.date<b.date?-1:1):(a.date<b.date?1:-1);return String(a.createdAt||"")<String(b.createdAt||"")?-1:1});
+ lastItems=items;var box=$("#cards");
+ if(!items.length){box.innerHTML='<div class="blank"><b>ยังไม่มีรายการ</b>'+(requests.length?"ลองเปลี่ยนตัวกรองด้านบน":"เริ่มจากแท็บ “แจ้งลา / ใบลา”")+'</div>';return}
+ var h="",cur="";items.forEach(function(r){if(r.date!==cur){cur=r.date;h+='<div class="day"><span>'+esc(thDate(cur))+'</span>'+(cur===t?'<span class="tag">วันนี้</span>':'')+'</div>'}h+=cardHTML(r,"list")});
+ box.innerHTML=h}
+function renderAppr(){
+ var p=requests.filter(function(r){return st(r)==="pending"}).sort(function(a,b){return String(a.createdAt||"")<String(b.createdAt||"")?-1:1});
+ $("#pcnt").textContent=p.length;$("#pcnt").hidden=!p.length;
+ $("#acards").innerHTML=p.length?p.map(function(r){return cardHTML(r,"appr")}).join(""):'<div class="blank"><b>ไม่มีใบลาที่รออนุมัติ</b>เมื่อครูส่งใบลา จะปรากฏที่นี่ทันที</div>'}
+$("#filters").addEventListener("click",function(e){var c=e.target.closest(".chip");if(!c)return;range=c.dataset.range;syncChips();renderList()});
+$("#tfilter").addEventListener("change",function(e){tFilter=e.target.value;renderList()});
+$("#sfilter").addEventListener("change",function(e){sFilter=e.target.value;renderList()});
+async function decide(r,status,note){
+ try{await updRequest(r.id,{status:status,decidedAt:new Date().toISOString(),decidedBy:sess.name,dnote:note||""});toast(status==="approved"?"อนุมัติแล้ว":"บันทึกว่าไม่อนุมัติ")}
+ catch(e){toast("บันทึกไม่สำเร็จ ลองใหม่")}}
+function cardClick(e){
+ var b=e.target.closest("button[data-act]");if(!b)return;
+ var card=b.closest(".reqc"),id=card.dataset.id,r=requests.filter(function(x){return x.id===id})[0];if(!r)return;var a=b.dataset.act;
+ if(a==="ack"){ask("ยืนยันว่ารับทราบงานสอนแทนนี้แล้ว?","รับทราบ").then(function(ok){if(!ok)return;var now=new Date().toISOString();updRequest(r.id,{periods:(r.periods||[]).map(function(p){return p.sub===sess.name&&!p.ack?Object.assign({},p,{ack:now}):p})}).then(function(){toast("รับทราบงานแล้ว")},function(){toast("บันทึกไม่สำเร็จ")})});return}
+ if(a==="rmsub"){var n2=+b.dataset.n,p2=(r.periods||[]).filter(function(p){return p.n===n2})[0];if(!p2)return;ask("นำชื่อ “"+p2.sub+"” ออกจากคาบ "+n2+" ของ "+r.leaver+" ใช่หรือไม่?","นำออก").then(function(ok){if(ok)setSub(r,n2,"").then(function(){toast("นำชื่อออกแล้ว")},function(){toast("บันทึกไม่สำเร็จ")})});return}
+ if(a==="ok"||a==="no"){var n=$(".dnote",card);decide(r,a==="ok"?"approved":"rejected",n?n.value.trim():"")}
+ if(a==="print"){ensureNo(r).then(printForm,function(){toast("ออกเลขที่ไม่สำเร็จ ลองใหม่")})}
+ if(a==="copy"){var text=summaryText(r);
+  var fb=function(){var ta=card.querySelector(".copybox");if(!ta){ta=document.createElement("textarea");ta.className="copybox";ta.readOnly=true;card.appendChild(ta)}ta.value=text;ta.focus();ta.select();toast("เลือกข้อความแล้ว กดคัดลอกได้เลย")};
+  try{navigator.clipboard.writeText(text).then(function(){toast("คัดลอกแล้ว")},fb)}catch(err){fb()}}
+ if(a==="del"){ask("ลบใบลาของ "+r.leaver+" ออกจากระบบถาวรใช่หรือไม่?","ลบ").then(function(ok){if(ok)delRequest(id).then(function(){toast("ลบแล้ว")},function(){toast("ลบไม่สำเร็จ")})});return}
+ if(a==="del"){if(b.dataset.armed==="1"){delRequest(id).then(function(){toast("ลบแล้ว")},function(){toast("ลบไม่สำเร็จ")})}
+  else{b.dataset.armed="1";b.textContent="กดอีกครั้งเพื่อยืนยัน";setTimeout(function(){if(b.isConnected){b.dataset.armed="0";b.textContent="ลบ"}},4000)}}}
+$("#cards").addEventListener("click",cardClick);$("#acards").addEventListener("click",cardClick);$("#mytasks").addEventListener("click",cardClick);
+$("#cards").addEventListener("change",subChange);$("#acards").addEventListener("change",subChange);
+
+/* ---------- print ---------- */
+function usedDays(r,type){
+ var s=0;requests.forEach(function(x){if(x.id!==r.id&&x.leaver===r.leaver&&x.fy===r.fy&&x.leaveType===type&&st(x)==="approved"&&x.date<r.date)s+=x.days||0});return s}
+async function ensureNo(r){
+ if(r.no)return r;
+ var code=CODE[r.leaveType]||"ลอ",year=r.fy||fy(r.date),seq=nextNo(code,year);
+ var patch={code:code,fy:year,seq:seq,no:code+" "+pad(seq,3)+"/"+year,days:r.days||calcDays(r.date,r.end,r.kind,(r.periods||[]).length),pos:r.pos||"ครู",status:st(r)||"pending",createdAt:r.createdAt||new Date().toISOString()};
+ await updRequest(r.id,patch);Object.assign(r,patch);return r}
+function printForm(r){
+ var pr=r.leaveType==="ไปราชการ",title=pr?"ใบขออนุญาตไปราชการ":"ใบ"+r.leaveType,s=st(r),dots="………………………………";
+ var sch="โรงเรียนบ้านแม่เฟือง สำนักงานเขตพื้นที่การศึกษาประถมศึกษาลำปาง เขต 1";
+ var subs=(r.periods||[]).filter(function(p){return p.sub});
+ var by={};subs.forEach(function(p){(by[p.sub]=by[p.sub]||[]).push(p.n)});
+ var subTxt=Object.keys(by).map(function(n){return esc(n)+" (คาบ "+by[n].join(", ")+")"}).join(" และ ");
+ var h='<p class="no">เลขที่ '+esc(r.no||"")+'</p><p class="t">'+esc(title)+'</p>'
+  +'<p style="text-align:right">เขียนที่ โรงเรียนบ้านแม่เฟือง<br>วันที่ '+esc(thLong((r.createdAt||todayISO()).slice(0,10)))+'</p>'
+  +'<p><b>เรื่อง</b> '+(pr?"ขออนุญาตไปราชการ":"ขอ"+esc(r.leaveType))+'</p><p><b>เรียน</b> ผู้อำนวยการโรงเรียนบ้านแม่เฟือง</p>'
+  +'<p class="ind">ข้าพเจ้า '+esc(r.leaver)+' ตำแหน่ง '+esc(r.pos||"ครู")+' สังกัด '+sch+' '+(pr?"ขออนุญาตไปราชการ เพื่อ ":"มีความประสงค์ขอ"+esc(r.leaveType)+" เนื่องจาก ")+esc(r.reason||"")
+  +' ตั้งแต่วันที่ '+esc(thLong(r.date))+' ถึงวันที่ '+esc(thLong(r.end||r.date))+' มีกำหนด '+fmtN(r.days||1)+' วัน'+(r.kind!=="full"&&!r.end?' ('+esc(timeLabel(r))+')':'')+'</p>'
+  +'<p class="ind">ในระหว่างนี้ '+(subTxt?'ได้มอบหมายให้ '+subTxt+' สอนแทน ':'')+'ข้าพเจ้าสามารถติดต่อได้ที่ '+(r.contact?esc(r.contact):dots)+'</p>'
+  +'<p class="ind">จึงเรียนมาเพื่อโปรดพิจารณา'+(pr?'อนุญาต':'อนุมัติ')+'</p>'
+  +'<div class="sig">ขอแสดงความนับถือ<br><br>ลงชื่อ '+dots+' ผู้ขอ<br>( '+esc(r.leaver)+' )</div>';
+ if(!pr){
+  var rows=["ลาป่วย","ลากิจส่วนตัว","ลาพักผ่อน"];if(rows.indexOf(r.leaveType)<0)rows.push(r.leaveType);
+  h+='<p><b>สถิติการลาในปีงบประมาณ '+(r.fy||fy(r.date))+'</b></p><table><tr><th>ประเภทการลา</th><th>ลามาแล้ว (วัน)</th><th>ลาครั้งนี้ (วัน)</th><th>รวมเป็น (วัน)</th></tr>'
+  +rows.map(function(t){var u=usedDays(r,t),c=t===r.leaveType?(r.days||0):0;return '<tr><td>'+esc(t)+'</td><td>'+fmtN(u)+'</td><td>'+(c?fmtN(c):"-")+'</td><td>'+fmtN(u+c)+'</td></tr>'}).join("")+'</table>'}
+ h+='<div class="two"><div>ความเห็นผู้บังคับบัญชา<br>'+dots+dots+'<br>'+dots+dots+'<br><br>ลงชื่อ '+dots+'</div>'
+  +'<div>คำสั่ง<br>'+(s==="approved"?"☑":"☐")+' '+(pr?"อนุญาต":"อนุมัติ")+' &nbsp; '+(s==="rejected"?"☑":"☐")+' ไม่'+(pr?"อนุญาต":"อนุมัติ")
+  +(r.dnote?'<br>เหตุผล: '+esc(r.dnote):'')+'<br><br>ลงชื่อ '+(r.decidedBy?esc(r.decidedBy):dots)+'<br>ผู้อำนวยการโรงเรียนบ้านแม่เฟือง<br>วันที่ '+(r.decidedAt?esc(thLong(r.decidedAt.slice(0,10))):dots)+'</div></div>';
+ $("#print").innerHTML=h;
+ $("#docpage").innerHTML=h;location.hash="doc";window.scrollTo(0,0)}
+function doPrint(){try{window.print()}catch(e){toast("เปิดหน้านี้ในแท็บใหม่แล้วกดพิมพ์อีกครั้ง")}}
+$("#docprint").addEventListener("click",doPrint);$("#docback").addEventListener("click",function(){location.hash="list"});
+
+/* ---------- CSV ---------- */
+function csvCell(v){return '"'+String(v==null?"":v).replace(/"/g,'""')+'"'}
+function showCSV(name,tsv){$("#csvtitle").textContent="ตารางข้อมูล: "+name;$("#csvtext").value=tsv;$("#csvbox").hidden=false;$("#csvbox").scrollIntoView({behavior:"smooth",block:"start"});toast("บันทึกไฟล์ตรงไม่ได้ แสดงตารางให้คัดลอกแทน")}
+$("#csvclose").addEventListener("click",function(){$("#csvbox").hidden=true});
+$("#csvcopy").addEventListener("click",function(){var ta=$("#csvtext");ta.focus();ta.select();try{navigator.clipboard.writeText(ta.value).then(function(){toast("คัดลอกแล้ว วางใน Excel ได้เลย")},function(){document.execCommand("copy");toast("คัดลอกแล้ว")})}catch(e){try{document.execCommand("copy");toast("คัดลอกแล้ว")}catch(e2){toast("เลือกข้อความแล้ว กดคัดลอกเอง")}}});
+async function saveCSV(name,rows){
+ var tsv=rows.map(function(r){return r.map(function(v){return String(v==null?"":v).replace(/[\t\r\n]+/g," ")}).join("\t")}).join("\n");
+ var d=null;
+ try{d=await window.claude.use("downloads");if(!d){var pm=await window.claude.use("permissions");if(pm&&pm.request){await pm.request(["downloads"]);d=await window.claude.use("downloads")}}}catch(e){}
+ if(d){try{await d.save({filename:name,data:new Blob(["\ufeff"+rows.map(function(r){return r.map(csvCell).join(",")}).join("\r\n")],{type:"text/csv;charset=utf-8"})});toast("ส่งออกแล้ว");return}catch(e){if(e&&e.code==="declined")return}}
+ showCSV(name,tsv)}
+async function saveCSVold(name,rows){
+ var text="\ufeff"+rows.map(function(r){return r.map(csvCell).join(",")}).join("\r\n");
+ var d=null;try{d=await window.claude.use("downloads")}catch(e){}
+ if(!d){toast("เบราว์เซอร์นี้ยังไม่รองรับการดาวน์โหลด");return}
+ try{await d.save({filename:name,data:new Blob([text],{type:"text/csv;charset=utf-8"})});toast("ส่งออกแล้ว")}
+ catch(e){if(e&&e.code!=="declined")toast("ส่งออกไม่สำเร็จ")}}
+$("#csv1").addEventListener("click",function(){
+ var rows=[["เลขที่","สถานะ","ชื่อ-สกุล","ตำแหน่ง","ประเภท","วันที่เริ่ม","วันที่สิ้นสุด","จำนวนวัน","ช่วงเวลา","เหตุผล","ผู้สอนแทน","ผู้พิจารณา","วันที่พิจารณา","ความเห็น","ปีงบประมาณ"]];
+ lastItems.forEach(function(r){rows.push([r.no||"",STL[st(r)]||"ข้อมูลเดิม",r.leaver,r.pos||"",r.leaveType,thNum(r.date),thNum(r.end||r.date),r.days||"",timeLabel(r),r.reason||"",
+  (r.periods||[]).filter(function(p){return p.sub}).map(function(p){return "คาบ"+p.n+" "+p.sub}).join(" / "),r.decidedBy||"",r.decidedAt?thNum(r.decidedAt.slice(0,10)):"",r.dnote||"",r.fy||""])});
+ saveCSV("leave-"+todayISO()+".csv",rows)});
+$("#csv2").addEventListener("click",function(){
+ var year=fy(todayISO()),types=["ลาป่วย","ลากิจส่วนตัว","ลาพักผ่อน","ไปราชการ","ลาคลอดบุตร"],m={};
+ requests.forEach(function(r){if(st(r)!=="approved"||r.fy!==year)return;var o=m[r.leaver]=m[r.leaver]||{};var k=types.indexOf(r.leaveType)<0?"อื่น ๆ":r.leaveType;o[k]=(o[k]||0)+(r.days||0)});
+ var cols=types.concat(["อื่น ๆ"]),rows=[["ชื่อ-สกุล"].concat(cols.map(function(c){return c+" (วัน)"}),["รวม (วัน)"])];
+ allTeachers().forEach(function(n){var o=m[n]||{},t=0;rows.push([n].concat(cols.map(function(c){t+=o[c]||0;return o[c]||0}),[t]))});
+ saveCSV("leave-summary-fy"+year+".csv",rows)});
+
+/* ---------- dialog / substitutes / tasks / roster ---------- */
+function ask(msg,okLabel){return new Promise(function(res){var d=$("#dlg");$("#dlgmsg").textContent=msg;$("#dlgok").textContent=okLabel||"ยืนยัน";d.hidden=false;$("#dlgno").focus();
+ function done(v){d.hidden=true;$("#dlgok").onclick=null;$("#dlgno").onclick=null;d.onkeydown=null;res(v)}
+ $("#dlgok").onclick=function(){done(true)};$("#dlgno").onclick=function(){done(false)};d.onkeydown=function(e){if(e.key==="Escape")done(false)}})}
+function canRm(r){return !!sess&&(isStaff()||sess.name===r.leaver)}
+function canSub(r){return !!sess&&st(r)!=="rejected"&&(isStaff()||sess.name===r.leaver)&&(r.end||r.date)>=todayISO()}
+function subOpts(r){return '<option value="">＋ เพิ่มครูสอนแทน</option>'+allTeachers().filter(function(n){return n!==r.leaver}).map(function(n){return '<option value="'+esc(n)+'">'+esc(n)+'</option>'}).join("")}
+function setSub(r,n,name){var ps=(r.periods||[]).map(function(p){return p.n===n?Object.assign({},p,{sub:name,ack:""}):p});return updRequest(r.id,{periods:ps})}
+function subChange(e){var s=e.target.closest("select[data-addsub]");if(!s||!s.value)return;
+ var card=s.closest(".reqc"),r=requests.filter(function(x){return x.id===card.dataset.id})[0],n=+s.dataset.addsub,name=s.value;if(!r)return;
+ var w=conflictFor(r.date,n,name);if(w){toast(w);s.value="";return}
+ ask("เพิ่ม “"+name+"” สอนแทนคาบ "+n+" ของ "+r.leaver+" ใช่หรือไม่?","เพิ่ม").then(function(ok){if(!ok){s.value="";return}setSub(r,n,name).then(function(){toast("เพิ่มชื่อแล้ว")},function(){toast("บันทึกไม่สำเร็จ")})})}
+function renderAck(){var me=sess&&sess.name,t=todayISO(),n=0;if(me)requests.forEach(function(r){if(st(r)!=="rejected"&&(r.end||r.date)>=t)(r.periods||[]).forEach(function(p){if(p.sub===me&&!p.ack)n++})});
+ var c=$("#acnt");c.textContent=n;c.hidden=!n}
+function renderTasks(){
+ var box=$("#mytasks");if(!sess){box.innerHTML="";return}
+ var t=todayISO(),me=sess.name;
+ var mine=requests.filter(function(r){return st(r)!=="rejected"&&(r.end||r.date)>=t&&(r.periods||[]).some(function(p){return p.sub===me})}).sort(function(a,b){return a.date<b.date?-1:a.date>b.date?1:0});
+ if(!mine.length){box.innerHTML="";return}
+ box.innerHTML='<h2>งานสอนแทนที่ได้รับมอบหมาย</h2>'+mine.map(function(r){
+  var mp=r.periods.filter(function(p){return p.sub===me}),pend=mp.some(function(p){return !p.ack}),notes=mp.filter(function(p){return p.note}).map(function(p){return "คาบ "+p.n+": "+p.note}).join(" · ");
+  return '<article class="reqc" data-id="'+esc(r.id)+'"><div class="who"><strong>สอนแทน '+esc(r.leaver)+'</strong><span class="st '+(pend?"pending":"approved")+'">'+(pend?"รอรับทราบ":"รับทราบแล้ว")+'</span>'+(st(r)==="pending"?'<span class="badge">ใบลายังรออนุมัติ</span>':'')+'</div><p class="meta">'+esc(thDate(r.date))+' · คาบ '+mp.map(function(p){return p.n}).join(", ")+'</p>'+(notes?'<p class="remark">'+esc(notes)+'</p>':'')+(pend?'<div class="acts"><button type="button" class="btn small" data-act="ack">รับทราบงาน</button></div>':'')+'</article>'}).join("")}
+function renderRoster(){var box=$("#rosterbox");if(!sess||sess.role!=="admin"){box.hidden=true;return}box.hidden=false;
+ $("#rosterlist").innerHTML=allTeachers().map(function(n){return '<div class="acts" style="justify-content:space-between;border-top:1px solid var(--line);margin:0;padding:8px 0"><span>'+esc(n)+'</span><span style="display:flex;gap:8px;align-items:center"><select data-rolefor="'+esc(n)+'" aria-label="สิทธิ์ของ '+esc(n)+'" style="width:auto;min-height:38px">'+["teacher","director","hr"].map(function(k){return '<option value="'+k+'"'+(roleOf(n)===k?" selected":"")+'>'+RL3[k]+'</option>'}).join("")+'</select><button type="button" class="btn small ghost del" data-rm="'+esc(n)+'" aria-label="นำ '+esc(n)+' ออก">✕ นำออก</button></span></div>'}).join("")}
+$("#rosterlist").addEventListener("change",function(e){var t=e.target.closest("select[data-rolefor]");if(!t)return;var n=t.dataset.rolefor,r=t.value;
+ ask("ตั้งสิทธิ์ของ “"+n+"” เป็น “"+RL3[r]+"” ใช่หรือไม่?","ตั้งสิทธิ์").then(function(ok){if(!ok){renderRoster();return}setRole(n,r).then(function(){renderRoster();toast("ตั้งสิทธิ์แล้ว")},function(){renderRoster();toast("บันทึกไม่สำเร็จ")})})});
+$("#rosterlist").addEventListener("click",function(e){var b=e.target.closest("button[data-rm]");if(!b)return;var n=b.dataset.rm;
+ ask("นำ “"+n+"” ออกจากรายชื่อครูใช่หรือไม่?","นำออก").then(function(ok){if(ok)removeTeacher(n).then(function(){sig="";afterData();toast("นำชื่อออกแล้ว")},function(){toast("บันทึกไม่สำเร็จ")})})});
+$("#addteacher").addEventListener("click",function(){var name=$("#newteacher").value.replace(/\s+/g," ").trim();if(!name)return;
+ if(allTeachers().indexOf(name)>=0)return toast("มีชื่อนี้อยู่แล้ว");
+ ask("นำ “"+name+"” เข้าสู่รายชื่อครูใช่หรือไม่?","นำเข้า").then(function(ok){if(ok)addTeacher(name).then(function(){$("#newteacher").value="";sig="";afterData();toast("นำชื่อเข้าแล้ว")},function(){toast("บันทึกไม่สำเร็จ")})})});
+
+function renderRemoved(){var box=$("#removedbox");if(!sess||sess.role!=="admin"){box.hidden=true;return}
+ var rm=extra.filter(function(e){return e.removed});box.hidden=!rm.length;
+ $("#removedlist").innerHTML=rm.map(function(e){return '<div class="acts" style="justify-content:space-between;border-top:1px solid var(--line);margin:0;padding:8px 0"><span>'+esc(e.name)+'</span><button type="button" class="btn small ghost" data-back="'+esc(e.name)+'">นำกลับเข้า</button></div>'}).join("")}
+$("#removedlist").addEventListener("click",function(e){var b=e.target.closest("button[data-back]");if(!b)return;var n=b.dataset.back;
+ ask("นำ “"+n+"” กลับเข้าสู่รายชื่อครูใช่หรือไม่?","นำเข้า").then(function(ok){if(ok)addTeacher(n).then(function(){sig="";afterData();toast("นำชื่อกลับเข้าแล้ว")},function(){toast("บันทึกไม่สำเร็จ")})})});
+/* ---------- account ---------- */
+function myAcctId(){return sess.role==="teacher"?"t"+h32(sess.name):sess.role}
+function pinErr(m){var e=$("#pinerr");e.textContent=m;e.hidden=!m}
+$("#pinsave").addEventListener("click",async function(){
+ pinErr("");var o=$("#oldpin").value.trim(),n=$("#newpin").value.trim(),id=myAcctId(),a=accts[id];
+ if(!/^\d{4,}$/.test(n))return pinErr("PIN ใหม่ต้องเป็นตัวเลขอย่างน้อย 4 หลัก");
+ if(!a||a.pin!==await hashPin(o))return pinErr("PIN เดิมไม่ถูกต้อง");
+ try{await setAcct(id,{pin:await hashPin(n),name:sess.name});$("#oldpin").value="";$("#newpin").value="";toast("เปลี่ยน PIN แล้ว")}catch(e){pinErr("บันทึกไม่สำเร็จ ลองใหม่")}});
+function renderReset(){
+ var box=$("#resetbox");if(!isStaff()){box.hidden=true;return}box.hidden=false;
+ var rows=allTeachers().map(function(n){return {id:"t"+h32(n),label:n}});
+ $("#resetlist").innerHTML=rows.map(function(r){var has=!!accts[r.id];
+  return '<div class="acts" style="justify-content:space-between;border-top:1px solid var(--line);margin:0;padding:8px 0"><span>'+esc(r.label)+' <small class="hint">· '+(has?"ตั้ง PIN แล้ว":"ยังไม่ได้ตั้ง PIN")+'</small></span>'+(has?'<button type="button" class="btn small ghost del" data-rid="'+esc(r.id)+'">รีเซ็ต PIN</button>':'')+'</div>'}).join("")}
+$("#resetlist").addEventListener("click",async function(e){
+ var b=e.target.closest("button[data-rid]");if(!b)return;
+ if(!await ask("รีเซ็ต PIN ของผู้ใช้นี้ใช่หรือไม่?","รีเซ็ต"))return;
+ try{if(db){await db.doc("accounts/"+b.dataset.rid).delete()}else{delete accts[b.dataset.rid];lsSave();renderReset()}toast("รีเซ็ตแล้ว ให้ผู้ใช้ตั้ง PIN ใหม่ที่หน้าเข้าสู่ระบบ")}catch(err){toast("รีเซ็ตไม่สำเร็จ ลองใหม่")}});
+
+/* ---------- chrome ---------- */
+var tt;function toast(m){var el=$("#toast");el.textContent=m;el.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){el.classList.remove("on")},2600)}
+function route(){
+ if(!sess)return;var h=location.hash.replace("#","");if(h==="approve"&&!isDir())h="form";if(h==="users"&&sess.role!=="admin")h="form";if(["form","list","approve","doc","acct","users"].indexOf(h)<0)h="form";if(h==="doc"&&!$("#docpage").innerHTML)h="list";
+ ["form","list","approve","doc","acct","users"].forEach(function(v){$("#view-"+v).hidden=v!==h;var tb=$("#tab-"+v);if(tb)tb.setAttribute("aria-current",v===h?"page":"false")});window.scrollTo(0,0)}
+window.addEventListener("hashchange",route);
+
+/* ---------- boot ---------- */
+$("#date").value=F.date;$("#from").value=F.from;$("#to").value=F.to;
+setDateHint();syncKind();syncType();fillLogin();fillLeaver();fillQuick();sig=allTeachers().join("|");renderRows();loginSync();
+try{var ss=JSON.parse(sessionStorage.getItem("mf-sess")||"null");if(ss&&ss.role&&ss.name&&(ss.role!=="admin"||ss.name===ADMIN_USER)){if(ss.role!=="admin")ss.role="teacher";sess=ss;enterApp()}}catch(e){}
+connect();
+})();
+</script>
+</body></html>
