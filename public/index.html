@@ -251,6 +251,52 @@ button.stat{cursor:pointer}button.stat:hover{transform:translateY(-2px);border-c
 .modal .box.wide h3{font:600 16px var(--display);margin:14px 0 6px}
 .dl{margin:0;display:grid;gap:2px}.dr{display:grid;grid-template-columns:96px 1fr;gap:8px;padding:7px 0;border-bottom:1px dashed var(--line)}
 .dr dt{color:var(--muted);font-size:14px}.dr dd{margin:0;font-weight:600;word-break:break-word}
+
+/* ===== ส่วนหัวทักทาย ===== */
+.hello{border-top:1px solid rgba(255,255,255,.25)}
+.hello-in{max-width:880px;margin:0 auto;padding:10px 16px 14px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;color:#fff}
+@media (min-width:1100px){.hello-in{max-width:980px}}
+.hello-name{flex:1 1 220px;min-width:0;font:600 20px/1.35 var(--display);overflow-wrap:anywhere}
+.hello-name small{font:400 14px var(--body);opacity:.92;margin-left:6px}
+.hello-meta{display:flex;flex-wrap:wrap;gap:6px 8px}
+.hpill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.32);border-radius:999px;padding:3px 12px;font-size:14px;line-height:1.5}
+.hpill .ic{width:1.1em;height:1.1em}
+#htime{font-variant-numeric:tabular-nums}
+/* ===== ปฏิทินการลา ===== */
+.calhead{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.caltitle{flex:1;text-align:center;font:600 18px var(--display)}
+.calhead .btn{min-width:44px}
+.calleg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--muted);margin:0 0 10px}
+.calleg i{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:5px;vertical-align:-1px}
+.calleg .ok i{background:var(--ok-bg);border:1px solid var(--ok-ink)}
+.calleg .pend i{background:var(--pend-bg);border:1px dashed var(--pend-ink)}
+.calgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.cal-h{text-align:center;font-weight:700;font-size:13px;color:var(--muted);padding:4px 0}
+.cal-h:first-child,.cal-h:last-child{color:var(--danger)}
+.cal-d{position:relative;min-height:96px;display:flex;flex-direction:column;align-items:stretch;gap:3px;padding:5px;text-align:left;border:1px solid var(--line);border-radius:10px;background:color-mix(in srgb,var(--surface) 70%,transparent);color:var(--ink);overflow:hidden;font:inherit}
+.cal-d:hover{border-color:var(--btn)}
+.cal-d.we{background:var(--surface-2)}
+.cal-d.today{border-color:var(--btn);box-shadow:inset 0 0 0 1px var(--btn)}
+.cal-d.sel{outline:3px solid var(--focus);outline-offset:1px}
+.cal-d .dn{font-weight:700;font-size:14px;line-height:24px}
+.cal-d.today .dn{color:var(--btn-ink);background:var(--btn);border-radius:999px;width:24px;text-align:center}
+.cal-b{min-height:0}
+.chips{display:flex;flex-direction:column;gap:2px;min-width:0}
+.chip-l{display:block;font-size:12px;line-height:1.4;padding:0 6px;border-radius:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip-l.ok{background:var(--ok-bg);color:var(--ok-ink)}
+.chip-l.pend{background:var(--pend-bg);color:var(--pend-ink);border:1px dashed currentColor}
+.chip-more{font-size:12px;color:var(--muted)}
+.cal-n{display:none}
+.cdrow{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.cdrow:first-of-type{border-top:0}
+.cdrow strong{font-size:16px;overflow-wrap:anywhere}
+.cdrow .meta{flex-basis:100%;margin:0}
+@media (max-width:640px){
+.hello-name{font-size:18px}
+.cal-d{min-height:56px;align-items:center;padding:4px 2px}
+.chips{display:none}
+.cal-n{display:inline-block;min-width:22px;text-align:center;border-radius:999px;background:var(--btn);color:var(--btn-ink);font-size:12px;font-weight:700;line-height:20px}
+.calgrid{gap:3px}.caltitle{font-size:16px}}
 </style></head>
 <body>
 <div class="app" id="app">
@@ -261,7 +307,14 @@ button.stat{cursor:pointer}button.stat:hover{transform:translateY(-2px);border-c
 <div class="theme" role="group" aria-label="ธีม"><button type="button" data-t="light" aria-pressed="false">สว่าง</button><button type="button" data-t="dark" aria-pressed="false">มืด</button><button type="button" data-t="auto" aria-pressed="true">ตามเครื่อง</button></div>
 <span class="status" id="status" data-m="connecting" role="status"><i></i><b>กำลังเชื่อมต่อ</b></span>
 <div class="me" id="me" hidden><span id="mename"></span><button type="button" class="btn small ghost" id="logout"><svg class="ic" viewBox="0 0 24 24" data-ic="logout"></svg>ออกจากระบบ</button></div>
-</div></div></header>
+</div></div>
+<div class="hello" id="hello" hidden><div class="hello-in">
+<div class="hello-name"><span>สวัสดี</span> <b id="hname"></b><small id="hrole"></small></div>
+<div class="hello-meta">
+<span class="hpill"><svg class="ic" viewBox="0 0 24 24" data-ic="calendar"></svg><span id="hdate"></span></span>
+<span class="hpill"><svg class="ic" viewBox="0 0 24 24" data-ic="clock"></svg><span id="htime" aria-hidden="true"></span></span>
+<span class="hpill"><svg class="ic" viewBox="0 0 24 24" data-ic="layers"></svg><span id="hyear"></span></span>
+</div></div></div></header>
 <main class="wrap">
 <section id="view-login" class="card login">
 <h2><svg class="ic" viewBox="0 0 24 24" data-ic="lock"></svg> เข้าสู่ระบบ</h2>
@@ -277,7 +330,7 @@ button.stat{cursor:pointer}button.stat:hover{transform:translateY(-2px);border-c
 </section>
 
 <div id="main" hidden>
-<nav class="tabs" aria-label="เมนูหลัก"><a href="#form" id="tab-form"><svg class="ic" viewBox="0 0 24 24" data-ic="edit"></svg>แจ้งลา / ใบลา</a><a href="#list" id="tab-list"><svg class="ic" viewBox="0 0 24 24" data-ic="list"></svg>รายการ<span class="cnt" id="acnt" hidden>0</span></a><a href="#mine" id="tab-mine"><svg class="ic" viewBox="0 0 24 24" data-ic="user"></svg>ข้อมูลของฉัน</a><a href="#approve" id="tab-approve" hidden><svg class="ic" viewBox="0 0 24 24" data-ic="checkc"></svg>รออนุมัติ<span class="cnt" id="pcnt">0</span></a><a href="#users" id="tab-users" hidden><svg class="ic" viewBox="0 0 24 24" data-ic="users"></svg>จัดการผู้ใช้</a><a href="#acct" id="tab-acct"><svg class="ic" viewBox="0 0 24 24" data-ic="shield"></svg>บัญชี</a></nav>
+<nav class="tabs" aria-label="เมนูหลัก"><a href="#form" id="tab-form"><svg class="ic" viewBox="0 0 24 24" data-ic="edit"></svg>แจ้งลา / ใบลา</a><a href="#list" id="tab-list"><svg class="ic" viewBox="0 0 24 24" data-ic="list"></svg>รายการ<span class="cnt" id="acnt" hidden>0</span></a><a href="#mine" id="tab-mine"><svg class="ic" viewBox="0 0 24 24" data-ic="user"></svg>ข้อมูลของฉัน</a><a href="#approve" id="tab-approve" hidden><svg class="ic" viewBox="0 0 24 24" data-ic="checkc"></svg>รออนุมัติ<span class="cnt" id="pcnt">0</span></a><a href="#cal" id="tab-cal" hidden><svg class="ic" viewBox="0 0 24 24" data-ic="calendar"></svg>ปฏิทินการลา</a><a href="#users" id="tab-users" hidden><svg class="ic" viewBox="0 0 24 24" data-ic="users"></svg>จัดการผู้ใช้</a><a href="#acct" id="tab-acct"><svg class="ic" viewBox="0 0 24 24" data-ic="shield"></svg>บัญชี</a></nav>
 
 <section id="view-form" hidden>
 <p class="notice" id="readonly" hidden>บัญชีนี้เปิดดูรายการได้อย่างเดียว ไม่สามารถบันทึกข้อมูลได้</p>
@@ -327,11 +380,22 @@ button.stat{cursor:pointer}button.stat:hover{transform:translateY(-2px);border-c
 <section id="view-approve" hidden>
 <h2>ใบลารออนุมัติ</h2><p class="hint">ตรวจสอบแล้วกดอนุมัติหรือไม่อนุมัติได้ทันที ผลจะแสดงให้ครูเห็นและพิมพ์ในใบลาอัตโนมัติ</p>
 <div id="acards"></div></section>
+<section id="view-cal" hidden>
+<h2><svg class="ic" viewBox="0 0 24 24" data-ic="calendar"></svg> ปฏิทินการลาของครูทั้งหมด</h2>
+<div class="card">
+<div class="calhead"><button type="button" class="btn small ghost" id="calprev" aria-label="เดือนก่อนหน้า">‹</button><div class="caltitle" id="caltitle" aria-live="polite"></div><button type="button" class="btn small ghost" id="calnext" aria-label="เดือนถัดไป">›</button><button type="button" class="btn small ghost" id="caltoday">วันนี้</button></div>
+<p class="hint" id="calsum" style="margin-bottom:8px"></p>
+<div class="calleg"><span class="ok"><i></i>อนุมัติแล้ว</span><span class="pend"><i></i>รออนุมัติ</span><span>ลป ลาป่วย · ลก ลากิจ · ลพ ลาพักผ่อน · ปร ไปราชการ · ลค ลาคลอด</span></div>
+<div class="calgrid" id="calgrid" role="group" aria-label="ปฏิทินการลา"></div>
+</div>
+<div class="card" id="calday"></div>
+</section>
 </div>
 </main></div>
 <div id="print" aria-hidden="true"></div>
 <div class="modal" id="detail" hidden><div class="box wide" role="dialog" aria-modal="true"><div id="detailbody"></div></div></div>
 <div class="modal" id="dlg" hidden role="dialog" aria-modal="true" aria-labelledby="dlgmsg"><div class="box"><p id="dlgmsg"></p><div class="acts"><button type="button" class="btn small no" id="dlgok">ยืนยัน</button><button type="button" class="btn small ghost" id="dlgno">ยกเลิก</button></div></div></div>
+<div class="modal" id="pindlg" hidden role="dialog" aria-modal="true" aria-labelledby="pinmsg"><div class="box"><p id="pinmsg"></p><div class="fld"><label class="l" for="pinconfirm">รหัส PIN ของคุณ</label><input type="password" id="pinconfirm" inputmode="numeric" autocomplete="current-password"></div><p class="formerr" id="pinconfirmerr" role="alert" hidden style="margin-top:12px"></p><div class="acts"><button type="button" class="btn small no" id="pinok">ยืนยันการลบ</button><button type="button" class="btn small ghost" id="pinno">ยกเลิก</button></div></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -451,7 +515,7 @@ async function removeTeacher(name){
 var RL3={teacher:"ครู",director:"ผู้อำนวยการ",hr:"ฝ่ายบุคคล"};
 function roleOf(n){var r=roles[n];return r==="director"||r==="hr"?r:"teacher"}
 async function setRole(name,role){roles[name]=role;if(db)await db.doc("roles/r"+h32(name)).set({name:name,role:role});else lsSave()}
-function applyRoleUI(){$("#tab-approve").hidden=!isDir();$("#mename").textContent=sess.name+" ("+ROLEL[sess.role]+")";$("#leaver").disabled=sess.role==="teacher";if(sess.role==="teacher")F.leaver=sess.name}
+function applyRoleUI(){$("#tab-approve").hidden=!isDir();$("#tab-cal").hidden=!isDir();showHello();$("#mename").textContent=sess.name+" ("+ROLEL[sess.role]+")";$("#leaver").disabled=sess.role==="teacher";if(sess.role==="teacher")F.leaver=sess.name}
 function syncRole(){if(!sess||sess.role==="admin")return;var r=roleOf(sess.name);if(r===sess.role)return;sess.role=r;try{sessionStorage.setItem("mf-sess",JSON.stringify(sess))}catch(e){}
  if(!$("#main").hidden){applyRoleUI();fillLeaver();fillQuick();renderRows();renderAll();route()}}
 async function setAcct(id,o){accts[id]=o;if(db){await db.doc("accounts/"+id).set(o)}else lsSave()}
@@ -485,15 +549,15 @@ async function doLogin(){
  $("#lpin").value="";enterApp();
 }
 function enterApp(){
- $("#view-login").hidden=true;$("#main").hidden=false;$("#me").hidden=false;
+ $("#view-login").hidden=true;$("#main").hidden=false;$("#me").hidden=false;showHello();
  $("#mename").textContent=sess.name+" ("+ROLEL[sess.role]+")";
- $("#tab-approve").hidden=!isDir();$("#tab-users").hidden=sess.role!=="admin";$("#tab-mine").hidden=sess.role==="admin";$("#pincard").hidden=sess.role==="admin";$("#exports").hidden=false;
+ $("#tab-approve").hidden=!isDir();$("#tab-cal").hidden=!isDir();$("#tab-users").hidden=sess.role!=="admin";$("#tab-mine").hidden=sess.role==="admin";$("#pincard").hidden=sess.role==="admin";$("#exports").hidden=false;
  var tl=sess.role==="teacher";$("#leaver").disabled=tl;
  if(tl)F.leaver=sess.name;
  try{$("#pos").value=localStorage.getItem("mf-pos-"+F.leaver)||"ครู"}catch(e){$("#pos").value="ครู"}
  fillLeaver();fillQuick();renderRows();renderAll();route()}
 function logout(){sess=null;try{sessionStorage.removeItem("mf-sess")}catch(e){}
- $("#main").hidden=true;$("#me").hidden=true;$("#view-login").hidden=false;F.leaver="";loginSync()}
+ $("#main").hidden=true;$("#me").hidden=true;$("#hello").hidden=true;$("#view-login").hidden=false;F.leaver="";loginSync()}
 $("#loginbtn").addEventListener("click",doLogin);
 $("#lpin").addEventListener("keydown",function(e){if(e.key==="Enter")doLogin()});
 $("#logout").addEventListener("click",logout);
@@ -606,7 +670,7 @@ function cardHTML(r,mode){
  h+='<button type="button" class="btn small ghost" data-act="copy">คัดลอกข้อความ</button>'+(canDel(r)?'<button type="button" class="btn small ghost del" data-act="del">ลบ</button>':'')+'</div></article>';
  return h}
 function syncChips(){$$("#filters .chip").forEach(function(c){c.setAttribute("aria-pressed",c.dataset.range===range?"true":"false")})}
-function renderAll(){if(!sess)return;renderTasks();renderList();renderAppr();renderReset();renderRoster();renderRemoved();renderAck();renderMe();if(!$("#detail").hidden)renderDetail()}
+function renderAll(){if(!sess)return;renderTasks();renderList();renderAppr();renderReset();renderRoster();renderRemoved();renderAck();renderMe();renderCal();if(!$("#detail").hidden)renderDetail()}
 function renderList(){
  var t=todayISO();
  var td=requests.filter(function(r){return r.date===t&&!off(r)}),people={};td.forEach(function(r){people[r.leaver]=1});
@@ -645,9 +709,8 @@ function cardClick(e){
  if(a==="copy"){var text=summaryText(r);
   var fb=function(){var ta=card.querySelector(".copybox");if(!ta){ta=document.createElement("textarea");ta.className="copybox";ta.readOnly=true;card.appendChild(ta)}ta.value=text;ta.focus();ta.select();toast("เลือกข้อความแล้ว กดคัดลอกได้เลย")};
   try{navigator.clipboard.writeText(text).then(function(){toast("คัดลอกแล้ว")},fb)}catch(err){fb()}}
- if(a==="del"){ask("ลบใบลาของ "+r.leaver+" ออกจากระบบถาวรใช่หรือไม่?","ลบ").then(function(ok){if(ok)delRequest(id).then(function(){toast("ลบแล้ว")},function(){toast("ลบไม่สำเร็จ")})});return}
- if(a==="del"){if(b.dataset.armed==="1"){delRequest(id).then(function(){toast("ลบแล้ว")},function(){toast("ลบไม่สำเร็จ")})}
-  else{b.dataset.armed="1";b.textContent="กดอีกครั้งเพื่อยืนยัน";setTimeout(function(){if(b.isConnected){b.dataset.armed="0";b.textContent="ลบ"}},4000)}}}
+ if(a==="del"){askPin("ลบใบลาของ "+r.leaver+(r.no?" (เลขที่ "+r.no+")":"")+" ออกจากระบบถาวร ลบแล้วกู้คืนไม่ได้ กรอก PIN เพื่อยืนยัน").then(function(ok){if(ok)delRequest(id).then(function(){toast("ลบแล้ว")},function(){toast("ลบไม่สำเร็จ")})});return}
+}
 $("#cards").addEventListener("click",cardClick);$("#acards").addEventListener("click",cardClick);$("#mytasks").addEventListener("click",cardClick);
 $("#cards").addEventListener("change",subChange);$("#acards").addEventListener("change",subChange);
 
@@ -850,6 +913,87 @@ $("#detail").addEventListener("click",function(e){
  if(a==="ack"){ask("ยืนยันว่ารับทราบงานสอนแทนนี้แล้ว?","รับทราบ").then(function(ok){if(!ok)return;var now=new Date().toISOString();
   updRequest(r.id,{periods:(r.periods||[]).map(function(p){return p.sub===sess.name&&!p.ack?Object.assign({},p,{ack:now}):p})}).then(function(){toast("รับทราบงานแล้ว")},function(){toast("บันทึกไม่สำเร็จ")})})}});
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("#detail").hidden&&$("#dlg").hidden)closeDetail()});
+/* ---------- ส่วนหัวทักทาย ---------- */
+function showHello(){if(!sess)return;$("#hname").textContent=sess.name;$("#hrole").textContent="("+ROLEL[sess.role]+")";$("#hello").hidden=false;tickHello()}
+function tickHello(){
+ if(!sess)return;var d=new Date(),i=iso(d),y=fy(i);
+ $("#hdate").textContent=thDate(i);
+ $("#htime").textContent=pad(d.getHours())+":"+pad(d.getMinutes())+":"+pad(d.getSeconds())+" น.";
+ $("#hyear").textContent="ปีการศึกษา "+y+" (1 ตุลาคม "+(y-1)+" – 30 กันยายน "+y+")"}
+setInterval(tickHello,1000);
+
+/* ---------- ยืนยัน PIN ก่อนลบ ---------- */
+async function pinOk(pin){
+ if(sess.role==="admin")return pin===ADMIN_PASS;
+ var a=accts["t"+h32(sess.name)];if(!a||!a.pin)return null;
+ return a.pin===await hashPin(pin)}
+function askPin(msg){return new Promise(function(res){
+ var d=$("#pindlg"),inp=$("#pinconfirm"),er=$("#pinconfirmerr"),tries=0,busy=false;
+ $("#pinmsg").textContent=msg;inp.value="";er.hidden=true;d.hidden=false;inp.focus();
+ function done(v){d.hidden=true;inp.value="";$("#pinok").onclick=null;$("#pinno").onclick=null;d.onkeydown=null;inp.onkeydown=null;res(v)}
+ async function submit(){
+  if(busy)return;var v=inp.value.trim();
+  if(!/^\d{4,}$/.test(v)&&sess.role!=="admin"){er.textContent="กรอก PIN ตัวเลขอย่างน้อย 4 หลัก";er.hidden=false;inp.focus();return}
+  busy=true;var ok=await pinOk(v);busy=false;
+  if(ok===null){er.textContent="ไม่พบ PIN ของบัญชีนี้ กรุณาตั้ง PIN ในแท็บ “บัญชี” ก่อน";er.hidden=false;return}
+  if(ok){done(true);return}
+  tries++;inp.value="";
+  if(tries>=5){done(false);toast("กรอก PIN ผิดหลายครั้ง ยกเลิกการลบแล้ว");return}
+  er.textContent="PIN ไม่ถูกต้อง (ครั้งที่ "+tries+" จาก 5)";er.hidden=false;inp.focus()}
+ $("#pinok").onclick=submit;$("#pinno").onclick=function(){done(false)};
+ inp.onkeydown=function(e){if(e.key==="Enter"){e.preventDefault();submit()}};
+ d.onkeydown=function(e){if(e.key==="Escape")done(false)}})}
+
+/* ---------- ปฏิทินการลา (ผู้อำนวยการ) ---------- */
+var calY=null,calM=0,calSel="",DSHORT=["อา","จ","อ","พ","พฤ","ศ","ส"];
+function calReset(){var d=new Date();calY=d.getFullYear();calM=d.getMonth();calSel=todayISO()}
+function calPick(){var t=todayISO(),m=calY+"-"+pad(calM+1);calSel=t.slice(0,7)===m?t:m+"-01"}
+function leaveDays(r){
+ var out=[],s=r.date,e=r.end&&r.end>r.date?r.end:r.date;if(!s)return out;
+ var x=P(s),y=P(e),n=0;
+ while(x<=y&&n<400){var w=x.getDay();if(s===e||(w!==0&&w!==6))out.push(iso(x));x.setDate(x.getDate()+1);n++}
+ return out}
+function calMap(){var m={};
+ requests.forEach(function(r){if(!r.date||off(r))return;leaveDays(r).forEach(function(d){(m[d]=m[d]||[]).push(r)})});
+ Object.keys(m).forEach(function(d){m[d].sort(function(a,b){return String(a.leaver)<String(b.leaver)?-1:1})});return m}
+function shortName(n){var s=String(n||"").replace(/^(นางสาว|นาง|นาย)\s*/,"");return s.split(/\s+/)[0]||String(n||"")}
+function calChip(r){return '<span class="chip-l '+(st(r)==="pending"?"pend":"ok")+'">'+esc(shortName(r.leaver))+' · '+esc(CODE[r.leaveType]||"ลอ")+'</span>'}
+function renderCal(){
+ if(!sess||!isDir()||!$("#calgrid"))return;
+ if(calY===null)calReset();
+ var map=calMap(),dim=new Date(calY,calM+1,0).getDate(),lead=new Date(calY,calM,1).getDay(),t=todayISO(),seen={},ppl={};
+ var af=document.activeElement,fd=af&&af.closest&&af.closest("#calgrid")?af.getAttribute("data-day"):null;
+ var h=DSHORT.map(function(d){return '<div class="cal-h">'+d+'</div>'}).join("");
+ for(var i=0;i<lead;i++)h+='<div class="cal-b"></div>';
+ for(var d=1;d<=dim;d++){
+  var id=calY+"-"+pad(calM+1)+"-"+pad(d),list=map[id]||[],w=new Date(calY,calM,d).getDay();
+  list.forEach(function(r){seen[r.id]=1;ppl[r.leaver]=1});
+  h+='<button type="button" class="cal-d'+(w===0||w===6?" we":"")+(id===t?" today":"")+(id===calSel?" sel":"")+'" data-day="'+id+'" aria-pressed="'+(id===calSel)+'" aria-label="'+esc(thDate(id))+(list.length?" ครูลา "+list.length+" คน":" ไม่มีครูลา")+'"><span class="dn">'+d+'</span>'
+   +(list.length?'<span class="chips">'+list.slice(0,3).map(calChip).join("")+(list.length>3?'<span class="chip-more">+'+(list.length-3)+' คน</span>':"")+'</span><span class="cal-n">'+list.length+'</span>':"")+'</button>'}
+ $("#calgrid").innerHTML=h;
+ $("#caltitle").textContent=MONTHS[calM]+" "+(calY+543);
+ var ns=Object.keys(seen).length;
+ $("#calsum").textContent=ns?"เดือนนี้มีใบลา "+ns+" ใบ · ครูที่ลา "+Object.keys(ppl).length+" คน (ไม่นับใบลาที่ไม่อนุมัติหรือยกเลิก)":"เดือนนี้ยังไม่มีการลา";
+ if(fd){var nb=$('.cal-d[data-day="'+fd+'"]');if(nb)nb.focus({preventScroll:true})}
+ renderCalDay(map)}
+function renderCalDay(map){
+ var box=$("#calday"),list=map[calSel]||[];
+ var h='<h2>'+ic("calendar")+' '+esc(thDate(calSel))+(calSel===todayISO()?' <span class="st approved">วันนี้</span>':'')+'</h2>';
+ if(!list.length){box.innerHTML=h+'<p class="empty">ไม่มีครูลาในวันนี้</p>';return}
+ h+='<p class="hint">ครูลา '+list.length+' คน แตะ “รายละเอียด” เพื่อดูใบลาและครูสอนแทน</p>';
+ h+=list.map(function(r){var k=sx(r),open=(r.periods||[]).filter(function(p){return !p.sub}).length;
+  return '<div class="cdrow"><strong>'+esc(r.leaver)+'</strong><span class="badge">'+esc(r.leaveType)+'</span>'+(st(r)?'<span class="st '+k+'">'+STL[k]+'</span>':'')
+   +(open&&calSel===r.date?'<span class="pill warn">ยังไม่มีผู้สอนแทน '+open+' คาบ</span>':'')
+   +'<button type="button" class="btn small ghost" data-open="'+esc(r.id)+'">'+ic("eye")+'รายละเอียด</button>'
+   +'<p class="meta">'+esc(rangeLabel(r))+(r.days?' · '+fmtN(r.days)+' วัน':'')+(!r.end&&timeLabel(r)?' · '+esc(timeLabel(r)):'')+(r.reason?' · '+esc(r.reason):'')+'</p></div>'}).join("");
+ box.innerHTML=h}
+$("#view-cal").addEventListener("click",function(e){
+ var b=e.target.closest("button");if(!b)return;
+ if(b.id==="calprev"||b.id==="calnext"){calM+=b.id==="calnext"?1:-1;if(calM<0){calM=11;calY--}if(calM>11){calM=0;calY++}calPick();renderCal();return}
+ if(b.id==="caltoday"){calReset();renderCal();return}
+ if(b.dataset.open){openDetail(b.dataset.open);return}
+ if(b.dataset.day){calSel=b.dataset.day;renderCal();var nb=$('.cal-d[data-day="'+calSel+'"]');if(nb)nb.focus({preventScroll:true})}});
+
 /* ---------- account ---------- */
 function myAcctId(){return sess.role==="teacher"?"t"+h32(sess.name):sess.role}
 function pinErr(m){var e=$("#pinerr");e.textContent=m;e.hidden=!m}
@@ -871,8 +1015,8 @@ $("#resetlist").addEventListener("click",async function(e){
 /* ---------- chrome ---------- */
 var tt;function toast(m){var el=$("#toast");el.textContent=m;el.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){el.classList.remove("on")},2600)}
 function route(){
- if(!sess)return;var h=location.hash.replace("#","");if(h==="approve"&&!isDir())h="form";if(h==="users"&&sess.role!=="admin")h="form";if(h==="mine"&&sess.role==="admin")h="form";if(["form","list","mine","approve","doc","acct","users"].indexOf(h)<0)h="form";if(h==="doc"&&!$("#docpage").innerHTML)h="list";
- ["form","list","mine","approve","doc","acct","users"].forEach(function(v){$("#view-"+v).hidden=v!==h;var tb=$("#tab-"+v);if(tb)tb.setAttribute("aria-current",v===h?"page":"false")});window.scrollTo(0,0)}
+ if(!sess)return;var h=location.hash.replace("#","");if(h==="approve"&&!isDir())h="form";if(h==="users"&&sess.role!=="admin")h="form";if(h==="cal"&&!isDir())h="form";if(h==="mine"&&sess.role==="admin")h="form";if(["form","list","mine","approve","cal","doc","acct","users"].indexOf(h)<0)h="form";if(h==="doc"&&!$("#docpage").innerHTML)h="list";
+ ["form","list","mine","approve","cal","doc","acct","users"].forEach(function(v){$("#view-"+v).hidden=v!==h;var tb=$("#tab-"+v);if(tb)tb.setAttribute("aria-current",v===h?"page":"false")});window.scrollTo(0,0)}
 window.addEventListener("hashchange",route);
 
 /* ---------- boot ---------- */
